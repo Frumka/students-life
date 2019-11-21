@@ -1,5 +1,5 @@
 #include "Head.h"
-#include "Draw_windows.h"
+//#include "Draw_windows.h"
 #include "Window.h"
 #include "Button.h"
 using namespace sf;
@@ -9,30 +9,30 @@ using namespace sf;
 int main()
 {
 	extern sf::RenderWindow window;
-	//создание меню
-	Background main_men("images/main_menu_back.png");
-	Button new_game("images/Button_new_game.png", 738, 216);
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	Background main_men("../images/main_menu_back.png");
+	Button new_game("../images/Button_new_game.png", 738, 216);
 	main_men.push_button(new_game);
-	Button continue_game("images/Button_continue.png", 738, 437);
+	Button continue_game("../images/Button_continue.png", 738, 437);
 	main_men.push_button(continue_game);
-	Button quite("images/Button_leave.png", 738, 670);
+	Button quite("../images/Button_leave.png", 738, 670);
 	main_men.push_button(quite);
 	main_men.set_status(true);
 
 
-	//создание главного окна
-	Background main_game("images/main.png");
-	Button charector_b("images/C_button.png", 192, 861);
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	Background main_game("../images/main.png");
+	Button charector_b("../images/C_button.png", 192, 861);
 	main_game.push_button(charector_b);
-	Button shop_b("images/shop_b.png", 505 , 861);
+	Button shop_b("../images/shop_b.png", 505 , 861);
 	main_game.push_button(shop_b);
-	Button u_b("images/u_b.png", 810, 861);
+	Button u_b("../images/u_b.png", 810, 861);
 	main_game.push_button(u_b);
-	Button job_b("images/job_b.png", 1141, 861);
+	Button job_b("../images/job_b.png", 1141, 861);
 	main_game.push_button(job_b);
-	Button reletions("images/reletions_b.png", 1493, 861);
+	Button reletions("../images/reletions_b.png", 1493, 861);
 	main_game.push_button(reletions);
-	Button settings_b("images/settings_b.png", 1717, 606);
+	Button settings_b("../images/settings_b.png", 1717, 606);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
 	std::map<Background, bool> Active_window;
@@ -73,7 +73,7 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// "запрос закрытия" событие: мы закрываем окно
+			// "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}

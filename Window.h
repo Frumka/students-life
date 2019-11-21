@@ -1,11 +1,10 @@
 #pragma once
 
 #include "Head.h"
-#include "event_processor.h"
-#include "json.hpp"
+//#include "event_processor.h"
 #include <fstream>
 
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 using namespace sf;
 
@@ -28,14 +27,14 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 			pos1 = pos2;
 		}
 	}
-	Font font;//шрифт 
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
 	font.loadFromFile("CyrilicOld.ttf");
 	Text text;
 	text.setPosition(x * x_pos + 5, y * y_pos);
 	text.setFont(font);
 	text.setFillColor(a);
 	std::string str = "";
-	text.setCharacterSize(unsigned int(size*y));
+	text.setCharacterSize((unsigned int)size*y);
 	for (size_t i = 0; i < words.size(); i++)
 	{
 		str += words[i];
@@ -57,11 +56,11 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 
 void draw_money(RenderWindow& window, int a)
 {
-	Font font;//шрифт 
-	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
-	Text text(std::to_string(a), font, 40*y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
+	font.loadFromFile("CyrilicOld.ttf");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	Text text(std::to_string(a), font, 40*y);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
 	text.setFillColor(Color(0,145,26,255));
-//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ":)) пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	text.setPosition(1717*x, 285*y);
 	window.draw(text);
 }
@@ -74,8 +73,8 @@ public:
 	{
 		texture.loadFromFile(path);
 		sprite.setTexture(texture);
-		sprite.scale(x, y);
 		is_active = 0;
+		sprite.setScale(x,y);
 	}
 	Background(const Background& a)
 	{

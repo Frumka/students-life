@@ -1,13 +1,7 @@
 #include "Head.h"
-#include "Draw_windows.h"
-#include "Window.h"
-#include "Button.h"
 #include <thread>
-#include "Job_game.h"
 #include "new_job.h"
-#include "event_processor.h"
-#include "json.hpp"
-#include <fstream>
+//#include "event_processor.h"
 
 
 int main()
@@ -16,35 +10,35 @@ int main()
 
 	extern sf::RenderWindow window;
 	window.setKeyRepeatEnabled(true);
-	//создание меню
-	Background main_men("images/main_menu_back.png");
-	Button new_game("images/Button_new_game.png", 738, 216);
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	Background main_men("../images/main_menu_back.png");
+	Button new_game("../images/Button_new_game.png", 738, 216);
 	main_men.push_button(new_game);
-	Button continue_game("images/Button_continue.png", 738, 437);
+	Button continue_game("../images/Button_continue.png", 738, 437);
 	main_men.push_button(continue_game);
-	Button quite("images/Button_leave.png", 738, 670);
+	Button quite("../images/Button_leave.png", 738, 670);
 	main_men.push_button(quite);
 	main_men.set_status(true);
 
 
-	//создание главного окна
-	Background main_game("images/main.png");
-	Button charector_b("images/C_button.png", 192, 861);
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	Background main_game("../images/main.png");
+	Button charector_b("../images/C_button.png", 192, 861);
 	main_game.push_button(charector_b);
-	Button shop_b("images/shop_b.png", 505, 861);
+	Button shop_b("../images/shop_b.png", 505, 861);
 	main_game.push_button(shop_b);
-	Button u_b("images/u_b.png", 810, 861);
+	Button u_b("../images/u_b.png", 810, 861);
 	main_game.push_button(u_b);
-	Button job_b("images/job_b.png", 1141, 861);
+	Button job_b("../images/job_b.png", 1141, 861);
 	main_game.push_button(job_b);
-	Button reletions("images/reletions_b.png", 1493, 861);
+	Button reletions("../images/reletions_b.png", 1493, 861);
 	main_game.push_button(reletions);
-	Button settings_b("images/settings_b.png", 1717, 606);
+	Button settings_b("../images/settings_b.png", 1717, 606);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
 
-	Background ivent("images/ivent.png");
-	//создание главного окна
+	Background ivent("../images/ivent.png");
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	/*Background main_game("images/ivent.png");
 	Button charector_b("images/C_button.png", 192, 861);
 	main_game.push_button(charector_b);
@@ -60,27 +54,27 @@ int main()
 	main_game.push_button(settings_b);
 	main_game.set_status(false);*/
 
-	std::string s("ым путем установил, что при изменении магнитного поля и и утри замкнутого проводящего контура в нем возникнет электрический ток, который называют индукционным током. Опыты Фарадея можно воспроизвести следующим образом: при внесении или вынесении магнита в катушку, замкнутую на гальванометр, в катушке возникает индукционный ток (рис. 23). Если радом расположить две катушки (например, на общем сердечнике или одну катушку внутри другой) и одну катушку через ключ соединить с источником тока, то при замыкании или размыкании ключа в цепи первой катушки во второй катушке появится индукционный");
-	Background shop("images/shop.png");
-	Background Otnoshenia("images/Otnoshenia.png");
-	Background Charecter("images/Charecter.png");
-	Background nastroyki("images/nastroyki.png");
+	std::string s("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ (пїЅпїЅпїЅ. 23). пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ) пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+	Background shop("../images/shop.png");
+	Background Otnoshenia("../images/Otnoshenia.png");
+	Background Charecter("../images/Charecter.png");
+	Background nastroyki("../images/nastroyki.png");
 
 	int money = 500;
 	bool* active_window;
 	active_window = &main_men.is_active;
 
-	Music music;
-	music.openFromFile("music/1565802332_antoha-ms-tokye.ogg");
-	music.play();
-	music.setVolume(0);
+	//Music music;
+	//music.openFromFile("../music/1565802332_antoha-ms-tokye.ogg");
+	//music.play();
+	//music.setVolume(0);
 
 
-	Background job("images/Job_back.png");
-	Button job_start("images/start_job_button.png",745, 550);
+	Background job("../images/Job_back.png");
+	Button job_start("../images/start_job_button.png",745, 550);
 	job.push_button(job_start);
 
-	Background game("images/ivent.png");
+	Background game("../images/ivent.png");
 	
 	/*auto j2 = R"(
   {

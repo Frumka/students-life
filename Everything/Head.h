@@ -4,6 +4,5 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <string>
-#include "Hero.h"
 #include "Button.h"
 #include "Window.h"

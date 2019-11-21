@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Head.h"
-#include "Draw_windows.h"
+//#include "Draw_windows.h"
 using namespace sf;
 
 RenderWindow window(sf::VideoMode::getDesktopMode(), "Lesson 3. kychka-pc.ru",sf::Style::Fullscreen);
@@ -44,7 +44,8 @@ public:
 		{
 			return true;
 		}
-		else false;
+		else
+			return false;
 	}
 private:
 	double x_pos;
