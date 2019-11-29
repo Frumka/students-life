@@ -1,0 +1,22 @@
+﻿{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Ninja",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "-v",
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "SFML_DIR",
+          "value": "C:/Users/kiril/source/repos/Students_Life/Students_Life/SFML-2.5.1-win64",
+          "type": "PATH"
+        }
+      ]
+    }
+  ]
+}

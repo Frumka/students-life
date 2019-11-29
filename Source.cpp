@@ -1,4 +1,4 @@
-#include "Head.h"
+﻿#include "Head.h"
 #include <thread>
 #include "new_job.h"
 //#include "event_processor.h"
@@ -11,83 +11,91 @@ int main()
 	extern sf::RenderWindow window;
 	window.setKeyRepeatEnabled(true);
 	//�������� ����
-	Background main_men("../images/main_menu_back.png");
-	Button new_game("../images/Button_new_game.png", 738, 216);
+	Background main_men("images/main_menu_back.png");
+	Button new_game("images/Button_new_game.png", 738, 216);
 	main_men.push_button(new_game);
-	Button continue_game("../images/Button_continue.png", 738, 437);
+	Button continue_game("images/Button_continue.png", 738, 437);
 	main_men.push_button(continue_game);
-	Button quite("../images/Button_leave.png", 738, 670);
+	Button quite("images/Button_leave.png", 738, 670);
 	main_men.push_button(quite);
 	main_men.set_status(true);
 
 
 	//�������� �������� ����
-	Background main_game("../images/main.png");
-	Button charector_b("../images/C_button.png", 192, 861);
+	Background main_game("images/main.png");
+	Button charector_b("images/character_b.png", 192, 910);
 	main_game.push_button(charector_b);
-	Button shop_b("../images/shop_b.png", 505, 861);
+	Button shop_b("images/shop_b.png", 510, 910);
 	main_game.push_button(shop_b);
-	Button u_b("../images/u_b.png", 810, 861);
+	Button u_b("images/success_b.png", 840, 910);
 	main_game.push_button(u_b);
-	Button job_b("../images/job_b.png", 1141, 861);
+	Button job_b("images/job_b.png", 1170, 910);
 	main_game.push_button(job_b);
-	Button reletions("../images/reletions_b.png", 1493, 861);
+	Button reletions("images/relations_b.png", 1493, 910);
 	main_game.push_button(reletions);
-	Button settings_b("../images/settings_b.png", 1717, 606);
+	Button settings_b("images/settings_b.png", 1600, 606);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
-
-	Background ivent("../images/ivent.png");
+	
+	/*Background ivent("images/ivent.png");
 	//�������� �������� ����
 	/*Background main_game("images/ivent.png");
-	Button charector_b("images/C_button.png", 192, 861);
+	Button charector_b("images/C_button.png", 192, 910);
 	main_game.push_button(charector_b);
-	Button shop_b("images/shop_b.png", 505, 861);
+	Button shop_b("images/shop_b.png", 505, 910);
 	main_game.push_button(shop_b);
-	Button u_b("images/u_b.png", 810, 861);
+	Button u_b("images/u_b.png", 810, 910);
 	main_game.push_button(u_b);
-	Button job_b("images/job_b.png", 1141, 861);
+	Button job_b("images/job_b.png", 1141, 910);
 	main_game.push_button(job_b);
-	Button reletions("images/reletions_b.png", 1493, 861);
+	Button reletions("images/reletions_b.png", 1493, 910);
 	main_game.push_button(reletions);
 	Button settings_b("images/settings_b.png", 1717, 606);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);*/
 
 	std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
-	Background shop("../images/shop.png");
-	Background Otnoshenia("../images/Otnoshenia.png");
-	Background Charecter("../images/Charecter.png");
-	Background nastroyki("../images/nastroyki.png");
+	
+	
+	Background shop("images/main_back.png");
+	shop.push_sprite("images/shop.png", 342, 184);
+
+
+	Background Otnoshenia("images/main_back.png");
+	Otnoshenia.push_sprite("images/relations.png", 342, 184);
+
+	Background Charecter("images/main_back.png");
+	Charecter.push_sprite("images/character.png", 342, 184);
+
+
+	Background nastroyki("images/main_back.png");
+	nastroyki.push_sprite("images/settings.png", 342, 184);
 
 	int money = 500;
 	bool* active_window;
 	active_window = &main_men.is_active;
 
 	//Music music;
-	//music.openFromFile("../music/1565802332_antoha-ms-tokye.ogg");
+	//music.openFromFile("music/1565802332_antoha-ms-tokye.ogg");
 	//music.play();
 	//music.setVolume(0);
 
 
-	Background job("../images/Job_back.png");
-	Button job_start("../images/start_job_button.png",745, 550);
+	Background job("images/Job_back.png");
+	Button job_start("images/start_job_button.png", 745, 550);
 	job.push_button(job_start);
 
-	Background game("../images/ivent.png");
-	
+	Background game("images/ivent.png");
+
 	/*auto j2 = R"(
   {
-    "rabotaet?": "xuy",
-    "pi": 3.141
+	"rabotaet?": "xuy",
+	"pi": 3.141
   }
 )"_json;
-
 	json json_event;
 	std::cout << j2["rabotaet?"];
-
 	std::ifstream json_event_file("json_events/test_json.json");
-
 	json_event = json::parse(json_event_file);
 	std::cout << json_event["rabotaet?"];
 	//std::cout << json_event_file.rdbuf();
@@ -128,21 +136,21 @@ int main()
 				active_window = &main_game.is_active;
 				*active_window = true;
 			}*/
-		//	jump();
-			/**active_window = false;
-			active_window = &main_game.is_active;
-			*active_window = true;*/
+			//	jump();
+				/**active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;*/
 		}
 		if (main_men)
 		{
 
 			main_men.draw(window);
-			if (new_game.is_click())
+		/*	if (new_game.is_click())
 			{
 				*active_window = false;
 				active_window = &ivent.is_active;
 				*active_window = true;
-			}
+			}*/
 			if (continue_game.is_click())
 			{
 				*active_window = false;

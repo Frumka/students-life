@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "задача-CMakeLists",
+      "appliesTo": "CMakeLists.txt",
+      "type": "launch"
+    },
+    {
+      "taskName": "задача-CMakeLists",
+      "appliesTo": "CMakeLists.txt",
+      "type": "launch"
+    }
+  ]
+}
