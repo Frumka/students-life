@@ -1,7 +1,7 @@
 {
   "text": "Текст - описание события",
   "image_path": "Путь к картинке",
-  "button_count": "Кол-во активныъ кнопок(если нужно для отрисовки)",
+  "button_count": 4,
   "buttons": [
     {"text": "Текст - описание кнопки",
     "event": ["Aliev.mark=A", "Konova.mark=K"]},

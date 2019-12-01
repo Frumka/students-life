@@ -5,7 +5,7 @@
 #include <fstream>
 using json = nlohmann::json;
 
-#include <header.hpp>
+#include <event_processor.hpp>
 
 
 class prepod{
@@ -80,8 +80,9 @@ TEST(event_processor, file_single_comand){
 
     event_processor processor;
     processor.link_acessor(acessor);
+    processor.load_event("./tests/test_event.json");
 
-    processor.execute_chosen_button("../tests/test_event.json", 2);
+    processor.execute_button(2);
 
     EXPECT_EQ(Aliev.checkit(), "AA");
 }
@@ -99,29 +100,18 @@ TEST(event_processor, file_multiple_comands){
 
     event_processor processor;
     processor.link_acessor(acessor);
+    processor.load_event("./tests/test_event.json");
 
-    processor.execute_chosen_button("../tests/test_event.json", 1);
+    processor.execute_button(1);
 
     EXPECT_EQ(Aliev.checkit(), "A");
     EXPECT_EQ(Konova.checkit(), "K");
 }
 
-TEST(event_processor, drop_acessor){
-    prepod Aliev, Konova;
+TEST(event_processor, load_event){
+    event_processor processor;
+    processor.load_event("./tests/test_event.json");
 
-    std::map<std::string, std::map<std::string, std::string*>> acessor = {
-            {"Aliev", Aliev.acessor},
-            {"Konova", Konova.acessor},
-    };
-
-    EXPECT_EQ(Aliev.checkit(), "2");
-
-    event_processor processor(acessor);
-
-    processor.execute_string("Aliev.mark=-1");
-    EXPECT_EQ(Aliev.checkit(), "-1");
-
-    processor.drop_acessor();
-    // Uncathable error raise manually detected, test case sucessful
-    //EXPECT_ANY_THROW(processor.execute_string("Aliev.mark=-1"));
+    EXPECT_EQ(processor.saved_event["text"], "Текст - описание события");
+    EXPECT_EQ(processor.saved_event["button_count"], 4);
 }

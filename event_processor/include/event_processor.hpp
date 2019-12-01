@@ -1,7 +1,7 @@
 // Copyright 2018 Your Name <your_email>
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+#ifndef INCLUDE_EVENT_PROCESSOR_HPP_
+#define INCLUDE_EVENT_PROCESSOR_HPP_
 
 #include <string>
 #include <map>
@@ -26,6 +26,8 @@ std::vector<std::string> split(const std::string& s, char delimiter='.')
 
 class event_processor{
 public:
+    json saved_event = {};
+
     std::map<std::string, std::map<std::string, std::string*>> acessor;
 
     event_processor()= default;
@@ -36,6 +38,11 @@ public:
 
     void link_acessor(std::map<std::string, std::map<std::string, std::string*>> map){
         acessor = std::move(map);
+    }
+
+    void load_event(std::string path){
+        std::ifstream text_stream(path);
+        text_stream >> saved_event;
     }
 
     std::map<std::string, std::string*> operator[](const std::string &str){
@@ -55,12 +62,8 @@ public:
         acessor = {};
     }
 
-    void execute_chosen_button(const std::string &path, int button_number){
-        std::ifstream text_stream(path);
-        json event_fyle;
-        text_stream >> event_fyle;
-
-        for(const auto &e :event_fyle["buttons"][button_number - 1]["event"])
+    void execute_button(int button_number){
+        for(const auto &e :saved_event["buttons"][button_number - 1]["event"])
             execute_string(e);
     }
 
