@@ -1,36 +1,65 @@
 cmake_minimum_required(VERSION 3.13)
-project(sfml_playground)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
-set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/include")
-set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib")
-set(SFML_BIN_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/bin")
-set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib/cmake/SFML")
-message("cnake_source dir: ${CMAKE_SOURCE_DIR}")
-message("DIR: [${CMAKE_SOURCE_DIR}] \n PATH: [${CMAKE_MODULE_PATH}] \n SFML_DIR:[${SFML_DIR}]")
+#string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
+#string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
+#string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
+
+if(UNIX AND NOT APPLE)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-deb/include")
+
+endif(UNIX AND NOT APPLE)
+
+if(WIN32)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win/include")
+endif(WIN32)
+
+#TODO: попробовать убрать лишние команды
+if(WIN64)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/include")
+	set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib/cmake/SFML")
+endif(WIN64)
+
+include("tools/gate/cmake/HunterGate.cmake")
+
+set(HUNTER_CACHE_SERVERS
+		"https://github.com/bmstu-iu8-cpp-sem-3/hunter-cache"
+		CACHE STRING "Default cache server"
+)
+
+HunterGate(
+		URL "https://github.com/ruslo/hunter/archive/v0.23.214.tar.gz"
+		SHA1 "e14bc153a7f16d6a5eeec845fb0283c8fad8c358"
+)
+
+project(student-life-main)
 
 link_directories(
-        SFML_BIN_DIR
         SFML_LIBRARY_DIR
 )
 
 include_directories(
-	SFML_BIN_DIR
         SFML_INCLUDE_DIR
 )
 
-#set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
-#set(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules")
-
-
-
 find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
 
-add_executable(sfml_playground Source.cpp)
+add_executable(student-life-main Source.cpp)
 
-target_include_directories(sfml_playground
+target_include_directories(student-life-main
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-target_link_libraries(sfml_playground sfml-graphics sfml-audio sfml-system sfml-window)
+add_subdirectory(event_processor)
+
+find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
+
+target_link_libraries(student-life-main
+		sfml-graphics
+		sfml-audio
+		sfml-system
+		sfml-window
+		event_processor
+)
