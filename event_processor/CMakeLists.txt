@@ -35,8 +35,8 @@ target_include_directories(tests
         )
 
 set_target_properties(event_processor PROPERTIES
-        VERSION 1.1
-        SOVERSION 1
+        VERSION 2
+        SOVERSION 0
         PUBLIC_HEADER include/event_processor.hpp)
 
 target_link_libraries(tests GTest::main nlohmann_json::nlohmann_json)
