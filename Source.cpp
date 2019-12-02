@@ -2,7 +2,7 @@
 #include <thread>
 #include "new_job.h"
 //#include "event_processor.h"
-
+#include "Header.h"
 
 int main()
 {
@@ -54,7 +54,7 @@ int main()
 	main_game.push_button(settings_b);
 	main_game.set_status(false);*/
 
-	std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
+	//std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
 	
 	
 	Background shop("images/main_back.png");
@@ -87,6 +87,11 @@ int main()
 
 	Background game("images/ivent.png");
 
+	int set_volume = 50;
+	Texture ris;
+	ris.loadFromFile("images/riska.png");
+	Sprite riska;
+	riska.setTexture(ris);
 	/*auto j2 = R"(
   {
 	"rabotaet?": "xuy",
@@ -247,7 +252,9 @@ int main()
 		if (nastroyki)
 		{
 			nastroyki.draw(window);
-			if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			sound_volume(350, riska, set_volume);
+			sound_volume(500, riska, set_volume);
+			if (!(IntRect(334, 132, 1250, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
 				{
@@ -263,8 +270,9 @@ int main()
 		if (event.type == sf::Event::Closed)
 			window.close();
 
-		if (event.key.code == sf::Keyboard::Escape)
+		if (event.type == event.KeyPressed && event.key.code == Keyboard::Escape)
 		{
+			std::cout << "Danya privet";
 			*active_window = false;
 			active_window = &main_men.is_active;
 			*active_window = true;
