@@ -28,14 +28,14 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 			pos1 = pos2;
 		}
 	}
-	Font font;//пїЅпїЅпїЅпїЅпїЅ 
+	Font font;//шрифт 
 	font.loadFromFile("CyrilicOld.ttf");
 	Text text;
 	text.setPosition(x * x_pos + 5, y * y_pos);
 	text.setFont(font);
 	text.setFillColor(a);
 	std::string str = "";
-	text.setCharacterSize(static_cast<unsigned int>(size*y));
+	text.setCharacterSize(unsigned int(size*y));
 	for (size_t i = 0; i < words.size(); i++)
 	{
 		str += words[i];
@@ -57,12 +57,40 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 
 void draw_money(RenderWindow& window, int a)
 {
-	Font font;//пїЅпїЅпїЅпїЅпїЅ 
-	font.loadFromFile("CyrilicOld.ttf");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-	Text text(std::to_string(a), font, 40*y);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
+	Font font;//шрифт 
+	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
+	Text text(std::to_string(a), font, 45*y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
 	text.setFillColor(Color(0,145,26,255));
-//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ":)) пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-	text.setPosition(1717*x, 285*y);
+//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+	text.setPosition(1690*x, 372*y);
+	window.draw(text);
+}
+
+void draw_mood(RenderWindow& window, int a)
+{
+	Font font;//шрифт 
+	std::string str;
+	str = std::to_string(a);
+	str += " / 100";
+	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
+	Text text(str, font, 45 * y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	text.setFillColor(Color(252, 247, 22, 255));
+	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+	text.setPosition(1690 * x, 440 * y);
+	window.draw(text);
+}
+
+void draw_health(RenderWindow& window, int a)
+{
+	Font font;//шрифт 
+	std::string str;
+	str = std::to_string(a);
+	str += " / 100";
+	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
+	Text text(str, font, 45 * y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	text.setFillColor(Color(251, 46, 23, 255));
+	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+	text.setPosition(1690 * x, 515 * y);
 	window.draw(text);
 }
 
@@ -98,7 +126,7 @@ public:
 		for (size_t i = 0; i < sprites.size(); i++)
 		{
 			window.draw(sprites[i]);
-			std::cout << "Sprite";
+			//std::cout << "Sprite";
 		}
 		for (size_t i = 0; i < arr.size(); i++)
 		{	

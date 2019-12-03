@@ -10,30 +10,31 @@ extern RenderWindow window;
 
 void sound_volume(float y_pos, Sprite& riska, int& volume)
 {
+	riska.setScale(x, y);
 	float x_pos = ((volume * 477. / 100) + 1028) * x;
-	//float x_pos = 1028;
 	Event event;
 	window.pollEvent(event);
 	if (riska.getGlobalBounds().contains((float)Mouse::getPosition().x, (float)Mouse::getPosition().y))//и при этом координата курсора попадает в спрайт
 	{
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			volume = (Mouse::getPosition().x - (float)1030 * x) * 100. / 470;
+			volume = ((float)Mouse::getPosition().x - (float)1030 * x) * 100. / (470. * x);
 			std::cout << volume;
-			if (volume <= 0)
+			if (volume <= 4)
 			{
 				std::cout << "++";
-				volume = 1;
+				volume = 0;
 			}
-			if (volume >= 99)
+			if (volume >= 100)
 			{
 				std::cout << "--";
-				volume = 95;
+				volume = 100;
 			}
+			std::cout << volume;
 		}
 
 	}
-	riska.setPosition(1030 + volume * 470. / 100 - 10 , y_pos);
+	riska.setPosition((1030 + volume * 470. / 100 - 30) * x, y_pos * y);
 	window.draw(riska);
 }
 

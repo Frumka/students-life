@@ -1,7 +1,6 @@
 ﻿#include "Head.h"
 #include <thread>
 #include "new_job.h"
-//#include "event_processor.h"
 #include "Header.h"
 
 int main()
@@ -36,7 +35,7 @@ int main()
 	Button settings_b("images/settings_b.png", 1600, 606);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
-	
+
 	/*Background ivent("images/ivent.png");
 	//�������� �������� ����
 	/*Background main_game("images/ivent.png");
@@ -55,8 +54,8 @@ int main()
 	main_game.set_status(false);*/
 
 	//std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
-	
-	
+
+
 	Background shop("images/main_back.png");
 	shop.push_sprite("images/shop.png", 342, 184);
 
@@ -92,6 +91,10 @@ int main()
 	ris.loadFromFile("images/riska.png");
 	Sprite riska;
 	riska.setTexture(ris);
+
+	int health = 80;
+
+	int mood = 30;
 	/*auto j2 = R"(
   {
 	"rabotaet?": "xuy",
@@ -150,12 +153,12 @@ int main()
 		{
 
 			main_men.draw(window);
-		/*	if (new_game.is_click())
-			{
-				*active_window = false;
-				active_window = &ivent.is_active;
-				*active_window = true;
-			}*/
+			/*	if (new_game.is_click())
+				{
+					*active_window = false;
+					active_window = &ivent.is_active;
+					*active_window = true;
+				}*/
 			if (continue_game.is_click())
 			{
 				*active_window = false;
@@ -171,6 +174,8 @@ int main()
 		{
 			main_game.draw(window);
 			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
 			if (shop_b.is_click())
 			{
 				*active_window = false;
@@ -206,7 +211,10 @@ int main()
 		if (shop)
 		{
 			shop.draw(window);
-			if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
 				{
@@ -221,7 +229,10 @@ int main()
 		if (Otnoshenia)
 		{
 			Otnoshenia.draw(window);
-			if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
 				{
@@ -237,7 +248,10 @@ int main()
 		if (Charecter)
 		{
 			Charecter.draw(window);
-			if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
 				{
@@ -253,8 +267,11 @@ int main()
 		{
 			nastroyki.draw(window);
 			sound_volume(350, riska, set_volume);
-			sound_volume(500, riska, set_volume);
-			if (!(IntRect(334, 132, 1250, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			sound_volume(525, riska, set_volume);
+			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
 				{
