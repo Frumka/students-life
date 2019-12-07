@@ -130,7 +130,7 @@ TEST(event_processor, file_single_comand){
     processor.link_acessor(acessor);
     processor.load_event("./tests/test_event.json");
 
-    processor.execute_button(2);
+    processor.execute_button(1);
 
     EXPECT_EQ(Aliev.checkit(), "AA");
 }
@@ -150,7 +150,7 @@ TEST(event_processor, file_multiple_comands){
     processor.link_acessor(acessor);
     processor.load_event("./tests/test_event.json");
 
-    processor.execute_button(1);
+    processor.execute_button(0);
 
     EXPECT_EQ(Aliev.checkit(), "A");
     EXPECT_EQ(Konova.checkit(), "K");

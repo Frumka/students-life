@@ -15,7 +15,7 @@ void sound_volume(float y_pos, Sprite& riska, int& volume)
 	float x_pos = ((volume * 477. / 100) + 1028) * x;
 	Event event;
 	window.pollEvent(event);
-	if (riska.getGlobalBounds().contains((float)Mouse::getPosition().x, (float)Mouse::getPosition().y))//и при этом координата курсора попадает в спрайт
+	if (riska.getGlobalBounds().contains((float)Mouse::getPosition().x, (float)Mouse::getPosition().y))//пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	{
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
@@ -58,7 +58,7 @@ void Complexity(RenderWindow& window, int& index)
 	}
 	Text str;
 	Font font;
-	font.loadFromFile("CyrilicOld.ttf");
+	font.loadFromFile("CyrilicOld.TTF");
 	str.setFillColor(Color::Black);
 	str.setCharacterSize(80);
 	str.setFont(font);

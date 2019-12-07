@@ -4,8 +4,7 @@
 #include "Draw_windows.h"
 using namespace sf;
 
-RenderWindow window(sf::VideoMode::getDesktopMode() , "Lesson 3. kychka-pc.ru", sf::Style::Fullscreen);
-//RenderWindow window(sf::VideoMode(1900, 1000), "Lesson 3. kychka-pc.ru", sf::Style::None);
+RenderWindow window(sf::VideoMode::getDesktopMode() , "Students Life", sf::Style::Fullscreen);
 
 float x = ((float)window.getSize().x) / 1920.;
 float y = ((float)window.getSize().y) / 1080.;

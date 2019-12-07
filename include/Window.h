@@ -1,11 +1,9 @@
 #pragma once
 
 #include "Head.h"
-#include "event_processor.h"
-#include "json.hpp"
+#include <event_processor.hpp>
 #include <fstream>
-
-using json = nlohmann::json;
+#include <codecvt>
 
 using namespace sf;
 
@@ -28,20 +26,23 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 			pos1 = pos2;
 		}
 	}
-	Font font;//шрифт 
-	font.loadFromFile("CyrilicOld.ttf");
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
+	font.loadFromFile("CyrilicOld.TTF");
 	Text text;
 	text.setPosition(x * x_pos + 5, y * y_pos);
 	text.setFont(font);
 	text.setFillColor(a);
 	std::string str = "";
-	text.setCharacterSize(unsigned int(size*y));
+	text.setCharacterSize(static_cast<unsigned int>(size*y));
 	for (size_t i = 0; i < words.size(); i++)
 	{
 		str += words[i];
 		if (text.getLocalBounds().width <= wid)
 		{
-			text.setString(str);
+			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+			std::wstring wstr = converter.from_bytes(str);
+
+			text.setString(wstr);
 		}
 		else
 		{
@@ -57,11 +58,11 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 
 void draw_money(RenderWindow& window, int &a)
 {
-	Font font;//шрифт 
-	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
-	Text text(std::to_string(a), font, 45*y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
+	font.loadFromFile("CyrilicOld.TTF");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	Text text(std::to_string(a), font, 45*y);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
 	text.setFillColor(Color(0,145,26,255));
-//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ":)) пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	text.setPosition(1690*x, 372*y);
 	window.draw(text);
 }
@@ -72,14 +73,14 @@ void draw_mood(RenderWindow& window, int &a)
 	{
 		a = 100;
 	}
-	Font font;//шрифт 
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
 	std::string str;
 	str = std::to_string(a);
 	str += " / 100";
-	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
-	Text text(str, font, 45 * y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	font.loadFromFile("CyrilicOld.TTF");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	Text text(str, font, 45 * y);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
 	text.setFillColor(Color(252, 247, 22, 255));
-	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ":)) пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	text.setPosition(1690 * x, 440 * y);
 	window.draw(text);
 }
@@ -90,14 +91,14 @@ void draw_health(RenderWindow& window, int &a)
 	{
 		a = 100;
 	}
-	Font font;//шрифт 
+	Font font;//пїЅпїЅпїЅпїЅпїЅ 
 	std::string str;
 	str = std::to_string(a);
 	str += " / 100";
-	font.loadFromFile("CyrilicOld.ttf");//передаем нашему шрифту файл шрифта
-	Text text(str, font, 45 * y);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	font.loadFromFile("CyrilicOld.TTF");//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	Text text(str, font, 45 * y);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ(пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ);//пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ)
 	text.setFillColor(Color(251, 46, 23, 255));
-	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//жирный и подчеркнутый текст. по умолчанию он "худой":)) и не подчеркнутый
+	//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ":)) пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	text.setPosition(1690 * x, 515 * y);
 	window.draw(text);
 }

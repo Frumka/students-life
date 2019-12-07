@@ -16,7 +16,7 @@ int mont()
 	Clock clock;
 	Time timer = seconds(1);
 	Font font;
-	font.loadFromFile("CyrilicOld.ttf");
+	font.loadFromFile("CyrilicOld.TTF");
 	std::cout << " fafaf " << std::endl;
 	clock.restart();
 	window.setKeyRepeatEnabled(false);

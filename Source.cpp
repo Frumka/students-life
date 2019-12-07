@@ -1,8 +1,11 @@
 ﻿#include "Head.h"
 #include <thread>
+#include <iomanip>
 #include "new_job.h"
 #include "Settings.h"
 #include "Shop.h"
+#include "prepods.hpp"
+#include "event_window.hpp"
 
 Background shop("images/main_back.png");
 Background nastroyki("images/main_back.png");
@@ -11,6 +14,20 @@ std::vector<std::string> com;
 
 int main()
 {
+	///testovie prepodi
+	prepod A("Aname", "Amark"), K("Kname", "Kmark");
+
+	std::map<std::string, std::map<std::string, std::string*>> acessor = {
+			{"A", A.acessor},
+			{"K", K.acessor},
+	};
+	event_processor processor;
+	processor.link_acessor(acessor);
+	processor.load_event("json_events/testing_event.json");
+	//std::cout<<std::setw(4)<<processor.saved_event;
+	EventWindow ivent(processor);
+	///end of test block
+
 	com.push_back("   Легко");
 	com.push_back("   Норма");
 	com.push_back("Студент");
@@ -29,8 +46,10 @@ int main()
 	main_men.push_button(quite);
 	main_men.set_status(true);
 
+//	ivent.draw(window);
+//	window.display();
+//	std::cin.get();
 
-	//�������� �������� ����
 	Background main_game("images/main.png");
 	Button charector_b("images/character_b.png", 192, 910, Color::Cyan);
 	main_game.push_button(charector_b);
@@ -45,25 +64,6 @@ int main()
 	Button settings_b("images/settings_b.png", 1600, 606, Color::Cyan);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
-
-	/*Background ivent("images/ivent.png");
-	//�������� �������� ����
-	/*Background main_game("images/ivent.png");
-	Button charector_b("images/C_button.png", 192, 910);
-	main_game.push_button(charector_b);
-	Button shop_b("images/shop_b.png", 505, 910);
-	main_game.push_button(shop_b);
-	Button u_b("images/u_b.png", 810, 910);
-	main_game.push_button(u_b);
-	Button job_b("images/job_b.png", 1141, 910);
-	main_game.push_button(job_b);
-	Button reletions("images/reletions_b.png", 1493, 910);
-	main_game.push_button(reletions);
-	Button settings_b("images/settings_b.png", 1717, 606);
-	main_game.push_button(settings_b);
-	main_game.set_status(false);*/
-
-	//std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
 
 	extern std::vector<product*> products;
 	product burger_(500, 30, 20);
@@ -155,7 +155,7 @@ int main()
 )"_json;
 	json json_event;
 	std::cout << j2["rabotaet?"];
-	std::ifstream json_event_file("json_events/test_json.json");
+	std::ifstream json_event_file("json_events/testing_event.json");
 	json_event = json::parse(json_event_file);
 	std::cout << json_event["rabotaet?"];
 	//std::cout << json_event_file.rdbuf();
@@ -205,12 +205,12 @@ int main()
 		{
 
 			main_men.draw(window);
-			/*	if (new_game.is_click())
+				if (new_game.is_click())
 				{
 					*active_window = false;
 					active_window = &ivent.is_active;
 					*active_window = true;
-				}*/
+				}
 			if (continue_game.is_click())
 			{
 				*active_window = false;
@@ -260,6 +260,23 @@ int main()
 			}
 
 		}
+		if (ivent){
+			ivent.draw(window);
+			draw_money(window, money);
+			draw_health(window, health);
+			draw_mood(window, mood);
+			std::cout<<"A.mark = "<<A.mark<< std::endl;
+			std::cout<<"A.name = "<<A.name<< std::endl;
+			for(auto e: ivent.buttons){
+				if(e.is_click()){
+					e.execute();
+					*active_window = false;
+					active_window = &main_game.is_active;
+					*active_window = true;
+				}
+			}
+		}
+
 		if (shop)
 		{
 			draw_shop(money,mood,health);
