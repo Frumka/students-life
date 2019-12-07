@@ -12,7 +12,6 @@ private:
     std::string mood = "80";
 
 public:
-
     std::map<std::string, std::string*> acessor = {
             {"money", &money},
             {"health", &health},

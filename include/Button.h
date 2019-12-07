@@ -61,7 +61,7 @@ public:
 	}
 	float x_pos;
 	float y_pos;
-private:
+protected:
 	sf::Color button_color;
 	Sprite sprite;
 	Texture texture;

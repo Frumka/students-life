@@ -27,7 +27,7 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 			pos1 = pos2;
 		}
 	}
-	Font font;//����� 
+	Font font;
 	font.loadFromFile("CyrilicOld.TTF");
 	Text text;
 	text.setPosition(x * x_pos + 5, y * y_pos);

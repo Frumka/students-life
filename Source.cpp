@@ -20,8 +20,9 @@ int main()
 	prepod A("Aname", "Amark"), K("Kname", "Kmark");
 
 	std::map<std::string, std::map<std::string, std::string*>> acessor = {
-			{"A", A.acessor},
-			{"K", K.acessor},
+			{"A",      A.acessor},
+			{"K",      K.acessor},
+			{"player", player.acessor}
 	};
 	event_processor processor;
 	processor.link_acessor(acessor);

@@ -1,28 +1,32 @@
 {
-  "text": "Текст в верхней части события",
+  "title": "\"Пупа и Лупа\"",
+  "text": "Служили как-то раз два брата - Лупа и Пупа. И тут на страну напали враги. Лупу и Пупу назначили в разведку и на первом задании Лупе нужно было перекусить колючую проволоку на стене, чтобы пробраться в тыл врагу, но Лупа забыл свои кусачки и Пупе пришлось перекусить ...",
   "button_count": 4,
   "buttons": [
     {
-      "text": "Текст на кнопке без цифры",
-      "event": "A.mark=A",
+      "text": "За лупу",
+      "event": [
+        "player.mood+=1",
+        "player.money-=1000"
+      ],
       "next_event": "путь у файлу ивента, который нужно вызвать при следующем вызове эвента через время, none если такого нет",
       "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет"
     },
     {
-      "text": "buttons.text",
-      "event": ["A.mark=A", "A.name=Vasya"],
+      "text": "За же*у",
+      "event": "player.mood-=10",
       "next_event": "none",
       "next_instant_event": "none"
     },
     {
-      "text": "buttons.text",
-      "event": [ "Aliev.mark=A", "Konova.mark=K" ],
+      "text": "Булку с сыром",
+      "event": "player.money=666",
       "next_event": "none",
       "next_instant_event": "none"
     },
     {
-      "text": "buttons.text",
-      "event": [ "Aliev.mark=A", "Konova.mark=K" ],
+      "text": "Ясна, автору 0 лет",
+      "event": "player.health=-9000",
       "next_event": "none",
       "next_instant_event": "none"
     }
