@@ -37,12 +37,12 @@ void draw_shop(int &money,int &mood,int &health)
 	{
 		Text str;
 		Font font;
-		font.loadFromFile("CyrilicOld.TTF");
+		font.loadFromFile("CyrilicOld.ttf");
 		str.setFillColor(Color::Yellow);
 		str.setCharacterSize(30 * y);
 		str.setFont(font);
 		str.setPosition(shop.arr[i]->x_pos + 120*x, shop.arr[i]->y_pos + 142 * y);
-		str.setString(std::to_string(products[i]->price) + ".ï¿½");
+		str.setString(std::to_string(products[i]->price) + ".ð");
 		price.setPosition(shop.arr[i]->x_pos + 110*x , shop.arr[i]->y_pos + 130*y);
 		price.setScale(x, y);
 		window.draw(price);
