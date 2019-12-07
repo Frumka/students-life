@@ -30,9 +30,9 @@ int main()
 	EventWindow ivent(processor);
 	///end of test block
 
-	com.push_back("   Легко");
-	com.push_back("   Норма");
-	com.push_back("Студент");
+	com.emplace_back("   Легко");
+	com.emplace_back("   Норма");
+	com.emplace_back("Студент");
 	Texture p;
 	p.loadFromFile("images/price.png");
 	p.setSmooth(true);
@@ -47,10 +47,6 @@ int main()
 	Button quite("images/Button_leave.png", 738, 670, Color::Cyan);
 	main_men.push_button(quite);
 	main_men.set_status(true);
-
-//	ivent.draw(window);
-//	window.display();
-//	std::cin.get();
 
 	Background main_game("images/main.png");
 	Button charector_b("images/character_b.png", 192, 910, Color::Cyan);
@@ -124,7 +120,6 @@ int main()
 	nastroyki.push_button(left);
 	nastroyki.push_button(right);
 
-	int money = 50000;
 	bool* active_window;
 	active_window = &main_men.is_active;
 
@@ -146,24 +141,8 @@ int main()
 	Sprite riska;
 	riska.setTexture(ris);
 
-	int health = 80;
 	int complexity = 0;
-	int mood = 30;
-	/*auto j2 = R"(
-  {
-	"rabotaet?": "xuy",
-	"pi": 3.141
-  }
-)"_json;
-	json json_event;
-	std::cout << j2["rabotaet?"];
-	std::ifstream json_event_file("json_events/testing_event.json");
-	json_event = json::parse(json_event_file);
-	std::cout << json_event["rabotaet?"];
-	//std::cout << json_event_file.rdbuf();
-	//json json_event = "{\"text\": \"RABOTAET!\"}"_json;
-	//std::cout << json_event["text"];
-	//json_event_file >> json_event;*/
+
 
 	while (window.isOpen())
 	{
@@ -180,8 +159,7 @@ int main()
 			if (job_start.is_click())
 			{
 				//game.draw(window);
-				money = mont();
-				std::cout << money;
+				player.set_money(mont(player));
 				/**active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;

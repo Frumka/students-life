@@ -7,10 +7,10 @@
 using namespace sf;
 
 
-int mont()
+int mont(Player &player)
 {
 
-	int money = 0;
+	int money = player.get_money();
 	extern RenderWindow window;
 	srand(time(0));
 	Clock clock;

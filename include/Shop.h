@@ -54,10 +54,6 @@ void draw_shop(Player &player)
 				player.set_money(player.get_money() - products[i]->price);
 				player.set_health(player.get_health() + products[i]->health);
 				player.set_mood(player.get_mood() + products[i]->mood);
-
-				//money -= products[i]->price;
-				//mood += products[i]->mood;
-				//health += products[i]->health;
 			}
 		}
 	}
