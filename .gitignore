@@ -1,7 +1,11 @@
 #build dir
 out/
 .vs/
-
+Debug/
+Release/
+SFML-2.5.1-deb/
+SFML-2.5.1-win/
+SFML-2.5.1-win64/
 # Prerequisites
 *.d
 

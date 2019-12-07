@@ -55,7 +55,7 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 	window.draw(text);
 }
 
-void draw_money(RenderWindow& window, int a)
+void draw_money(RenderWindow& window, int &a)
 {
 	Font font;//רנטפע 
 	font.loadFromFile("CyrilicOld.ttf");//ןונוהאול םארולף רנטפעף פאיכ רנטפעא
@@ -66,8 +66,12 @@ void draw_money(RenderWindow& window, int a)
 	window.draw(text);
 }
 
-void draw_mood(RenderWindow& window, int a)
+void draw_mood(RenderWindow& window, int &a)
 {
+	if (a > 100)
+	{
+		a = 100;
+	}
 	Font font;//רנטפע 
 	std::string str;
 	str = std::to_string(a);
@@ -80,8 +84,12 @@ void draw_mood(RenderWindow& window, int a)
 	window.draw(text);
 }
 
-void draw_health(RenderWindow& window, int a)
+void draw_health(RenderWindow& window, int &a)
 {
+	if (a > 100)
+	{
+		a = 100;
+	}
 	Font font;//רנטפע 
 	std::string str;
 	str = std::to_string(a);
@@ -170,9 +178,9 @@ public:
 		return sprite;
 	}
 	bool is_active = false;
+	std::vector<Button*> arr;
 private:
 	sf::Texture texture;
-	std::vector<Button*> arr;
 	std::vector<Sprite> sprites;
 	std::vector<Texture> textures;
 	sf::Sprite sprite;
