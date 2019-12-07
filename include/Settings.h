@@ -64,6 +64,6 @@ void Complexity(RenderWindow& window, int& index)
 	str.setFont(font);
 	str.setScale(x, y);
 	str.setPosition((638 + 342) * x, (184 + 554) * y);
-	str.setString(com[index]);
+	str.setString(str_to_wstr(com[index]));
 	window.draw(str);
 }
