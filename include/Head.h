@@ -7,6 +7,7 @@
 #include "Hero.h"
 #include "Button.h"
 #include "Window.h"
+#include "Player.hpp"
 
 std::wstring str_to_wstr(const std::string& str){
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;

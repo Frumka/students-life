@@ -14,6 +14,8 @@ std::vector<std::string> com;
 
 int main()
 {
+	Player player;
+
 	///testovie prepodi
 	prepod A("Aname", "Amark"), K("Kname", "Kmark");
 
@@ -225,9 +227,9 @@ int main()
 		if (main_game)
 		{
 			main_game.draw(window);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			if (shop_b.is_click())
 			{
 				*active_window = false;
@@ -262,9 +264,9 @@ int main()
 		}
 		if (ivent){
 			ivent.draw(window);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			std::cout<<"A.mark = "<<A.mark<< std::endl;
 			std::cout<<"A.name = "<<A.name<< std::endl;
 			for(auto e: ivent.buttons){
@@ -279,10 +281,10 @@ int main()
 
 		if (shop)
 		{
-			draw_shop(money,mood,health);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_shop(player);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
@@ -298,9 +300,9 @@ int main()
 		if (Otnoshenia)
 		{
 			Otnoshenia.draw(window);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
@@ -317,9 +319,9 @@ int main()
 		if (Charecter)
 		{
 			Charecter.draw(window);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
@@ -337,9 +339,9 @@ int main()
 			nastroyki.draw(window);
 			sound_volume(350, riska, set_volume);
 			//sound_volume(525, riska, set_volume);
-			draw_money(window, money);
-			draw_health(window, health);
-			draw_mood(window, mood);
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
 			Complexity(window, complexity);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{

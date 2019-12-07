@@ -30,7 +30,7 @@ extern float y;
 extern RenderWindow window;
 extern Sprite price;
 
-void draw_shop(int &money,int &mood,int &health)
+void draw_shop(Player &player)
 {
 	shop.draw(window);
 	for (size_t i = 0; i < products.size(); i++)
@@ -49,11 +49,15 @@ void draw_shop(int &money,int &mood,int &health)
 		window.draw(str);
 		if (shop.arr[i]->is_click())
 		{
-			if (products[i]->price <= money)
+			if (products[i]->price <= player.get_money())
 			{
-				money -= products[i]->price;
-				mood += products[i]->mood;
-				health += products[i]->health;
+				player.set_money(player.get_money() - products[i]->price);
+				player.set_health(player.get_health() + products[i]->health);
+				player.set_mood(player.get_mood() + products[i]->mood);
+
+				//money -= products[i]->price;
+				//mood += products[i]->mood;
+				//health += products[i]->health;
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Head.h"
+#include "Player.hpp"
 #include <event_processor.hpp>
 #include <fstream>
 #include <codecvt>
@@ -56,26 +57,22 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 	window.draw(text);
 }
 
-void draw_money(RenderWindow& window, int &a)
+void draw_money(RenderWindow& window, const Player &player)
 {
 	Font font;//����� 
 	font.loadFromFile("CyrilicOld.TTF");//�������� ������ ������ ���� ������
-	Text text(std::to_string(a), font, 45*y);//������� ������ �����. ���������� � ������ ����� ������, �����, ������ ������(� ��������);//��� ������ ����� (�� ������)
+	Text text(std::to_string(player.get_money()), font, 45*y);//������� ������ �����. ���������� � ������ ����� ������, �����, ������ ������(� ��������);//��� ������ ����� (�� ������)
 	text.setFillColor(Color(0,145,26,255));
 //	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//������ � ������������ �����. �� ��������� �� "�����":)) � �� ������������
 	text.setPosition(1690*x, 372*y);
 	window.draw(text);
 }
 
-void draw_mood(RenderWindow& window, int &a)
+void draw_mood(RenderWindow& window, const Player &player)
 {
-	if (a > 100)
-	{
-		a = 100;
-	}
 	Font font;//����� 
 	std::string str;
-	str = std::to_string(a);
+	str = std::to_string(player.get_mood());
 	str += " / 100";
 	font.loadFromFile("CyrilicOld.TTF");//�������� ������ ������ ���� ������
 	Text text(str, font, 45 * y);//������� ������ �����. ���������� � ������ ����� ������, �����, ������ ������(� ��������);//��� ������ ����� (�� ������)
@@ -85,15 +82,11 @@ void draw_mood(RenderWindow& window, int &a)
 	window.draw(text);
 }
 
-void draw_health(RenderWindow& window, int &a)
+void draw_health(RenderWindow& window, const Player &player)
 {
-	if (a > 100)
-	{
-		a = 100;
-	}
 	Font font;//����� 
 	std::string str;
-	str = std::to_string(a);
+	str = std::to_string(player.get_health());
 	str += " / 100";
 	font.loadFromFile("CyrilicOld.TTF");//�������� ������ ������ ���� ������
 	Text text(str, font, 45 * y);//������� ������ �����. ���������� � ������ ����� ������, �����, ������ ������(� ��������);//��� ������ ����� (�� ������)
