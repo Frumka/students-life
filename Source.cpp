@@ -1,38 +1,48 @@
 ﻿#include "Head.h"
 #include <thread>
 #include "new_job.h"
-#include "Header.h"
+#include "Settings.h"
+#include "Shop.h"
+
+Background shop("images/main_back.png");
+Background nastroyki("images/main_back.png");
+Sprite price;
+std::vector<std::string> com;
 
 int main()
 {
-
-
+	com.push_back("   Легко");
+	com.push_back("   Норма");
+	com.push_back("Студент");
+	Texture p;
+	p.loadFromFile("images/price.png");
+	p.setSmooth(true);
+	price.setTexture(p);
 	extern sf::RenderWindow window;
 	window.setKeyRepeatEnabled(true);
-	//�������� ����
 	Background main_men("images/main_menu_back.png");
-	Button new_game("images/Button_new_game.png", 738, 216);
+	Button new_game("images/Button_new_game.png", 738, 216, Color::Cyan);
 	main_men.push_button(new_game);
-	Button continue_game("images/Button_continue.png", 738, 437);
+	Button continue_game("images/Button_continue.png", 738, 437, Color::Cyan);
 	main_men.push_button(continue_game);
-	Button quite("images/Button_leave.png", 738, 670);
+	Button quite("images/Button_leave.png", 738, 670, Color::Cyan);
 	main_men.push_button(quite);
 	main_men.set_status(true);
 
 
 	//�������� �������� ����
 	Background main_game("images/main.png");
-	Button charector_b("images/character_b.png", 192, 910);
+	Button charector_b("images/character_b.png", 192, 910, Color::Cyan);
 	main_game.push_button(charector_b);
-	Button shop_b("images/shop_b.png", 510, 910);
+	Button shop_b("images/shop_b.png", 510, 910, Color::Cyan);
 	main_game.push_button(shop_b);
-	Button u_b("images/success_b.png", 840, 910);
+	Button u_b("images/success_b.png", 840, 910, Color::Cyan);
 	main_game.push_button(u_b);
-	Button job_b("images/job_b.png", 1170, 910);
+	Button job_b("images/job_b.png", 1170, 910, Color::Cyan);
 	main_game.push_button(job_b);
-	Button reletions("images/relations_b.png", 1493, 910);
+	Button reletions("images/relations_b.png", 1493, 910, Color::Cyan);
 	main_game.push_button(reletions);
-	Button settings_b("images/settings_b.png", 1600, 606);
+	Button settings_b("images/settings_b.png", 1600, 606, Color::Cyan);
 	main_game.push_button(settings_b);
 	main_game.set_status(false);
 
@@ -55,9 +65,48 @@ int main()
 
 	//std::string s("�� ����� ���������, ��� ��� ��������� ���������� ���� � � ���� ���������� ����������� ������� � ��� ��������� ������������� ���, ������� �������� ������������ �����. ����� ������� ����� ������������� ��������� �������: ��� �������� ��� ��������� ������� � �������, ��������� �� ������������, � ������� ��������� ������������ ��� (���. 23). ���� ����� ����������� ��� ������� (��������, �� ����� ���������� ��� ���� ������� ������ ������) � ���� ������� ����� ���� ��������� � ���������� ����, �� ��� ��������� ��� ���������� ����� � ���� ������ ������� �� ������ ������� �������� ������������");
 
+	extern std::vector<product*> products;
+	product burger_(500, 30, 20);
+	products.push_back(&burger_);
+	product pizza_(500, 30, 20);
+	products.push_back(&pizza_);
+	product coke_(500, 30, 20);
+	products.push_back(&coke_);
+	product shirt_(500, 30, 20);
+	products.push_back(&shirt_);
+	product shorts_(2000, 30, 20);
+	products.push_back(&shorts_);
+	product boots_(500, 30, 20);
+	products.push_back(&boots_);
+	product headphones_(500, 30, 20);
+	products.push_back(&headphones_);
+	product phone_(500, 30, 20);
+	products.push_back(&phone_);
+	product flash_(500, 30, 20);
+	products.push_back(&flash_);
 
-	Background shop("images/main_back.png");
-	shop.push_sprite("images/shop.png", 342, 184);
+	shop.push_sprite("images/Shop_back.png", 342, 184);
+
+	Button burger("images/burger.png", 788, 271, Color(255,255,0,255));
+	shop.push_button(burger);
+	Button pizza("images/pizza.png", 1053, 271, Color(255, 255, 0, 255));
+	shop.push_button(pizza);
+	Button coke("images/coke.png", 1310, 271, Color::Red);
+	shop.push_button(coke);
+
+	Button shirt("images/shirt.png", 788, 470, Color::Red);
+	shop.push_button(shirt);
+	Button shorts("images/shorts.png", 1053, 470, Color::Magenta);
+	shop.push_button(shorts);
+	Button boots("images/boots.png", 1310, 470, Color::Cyan);
+	shop.push_button(boots);
+
+	Button headphones("images/headphones.png", 788, 668, Color::Cyan);
+	shop.push_button(headphones);
+	Button phone("images/phone.png", 1053, 668, Color::Cyan);
+	shop.push_button(phone);
+	Button flash("images/flash.png", 1310, 668, Color::Cyan);
+	shop.push_button(flash);
 
 
 	Background Otnoshenia("images/main_back.png");
@@ -67,10 +116,13 @@ int main()
 	Charecter.push_sprite("images/character.png", 342, 184);
 
 
-	Background nastroyki("images/main_back.png");
 	nastroyki.push_sprite("images/settings.png", 342, 184);
+	Button left("images/nastoiky_left.png", 822, 573 + 184, Color::Cyan);
+	Button right("images/nastroiky_right.png", 996 + 342, 573 + 184, Color::Cyan);
+	nastroyki.push_button(left);
+	nastroyki.push_button(right);
 
-	int money = 500;
+	int money = 50000;
 	bool* active_window;
 	active_window = &main_men.is_active;
 
@@ -81,7 +133,7 @@ int main()
 
 
 	Background job("images/Job_back.png");
-	Button job_start("images/start_job_button.png", 745, 550);
+	Button job_start("images/start_job_button.png", 745, 550, Color::Cyan);
 	job.push_button(job_start);
 
 	Background game("images/ivent.png");
@@ -93,7 +145,7 @@ int main()
 	riska.setTexture(ris);
 
 	int health = 80;
-
+	int complexity = 0;
 	int mood = 30;
 	/*auto j2 = R"(
   {
@@ -210,7 +262,7 @@ int main()
 		}
 		if (shop)
 		{
-			shop.draw(window);
+			draw_shop(money,mood,health);
 			draw_money(window, money);
 			draw_health(window, health);
 			draw_mood(window, mood);
@@ -267,10 +319,11 @@ int main()
 		{
 			nastroyki.draw(window);
 			sound_volume(350, riska, set_volume);
-			sound_volume(525, riska, set_volume);
+			//sound_volume(525, riska, set_volume);
 			draw_money(window, money);
 			draw_health(window, health);
 			draw_mood(window, mood);
+			Complexity(window, complexity);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))
