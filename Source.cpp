@@ -6,14 +6,24 @@
 #include "Shop.h"
 #include "prepods.hpp"
 #include "event_window.hpp"
+#include "Relations.h"
+
 
 Background shop("images/main_back.png");
 Background nastroyki("images/main_back.png");
 Sprite price;
-std::vector<std::string> com;
+Sprite riska2;
+//Sprite riska2;
 
 int main()
 {
+
+	Texture risq;
+	risq.loadFromFile("images/riska2.png");
+	riska2.setTexture(risq);
+	
+
+
 	Player player;
 
 	///testovie prepodi
@@ -30,11 +40,8 @@ int main()
 	//std::cout<<std::setw(4)<<processor.saved_event;
 	EventWindow ivent(processor);
 	///end of test block
-
-	com.emplace_back("Легко");
-	com.emplace_back("Норма");
-	com.emplace_back("Студент");
 	Texture p;
+	
 	p.loadFromFile("images/price.png");
 	p.setSmooth(true);
 	price.setTexture(p);
@@ -92,7 +99,6 @@ int main()
 	shop.push_button(pizza);
 	Button coke("images/coke.png", 1310, 271, Color::Red);
 	shop.push_button(coke);
-
 	Button shirt("images/shirt.png", 788, 470, Color::Red);
 	shop.push_button(shirt);
 	Button shorts("images/shorts.png", 1053, 470, Color::Magenta);
@@ -130,7 +136,8 @@ int main()
 	//music.setVolume(0);
 
 
-	Background job("images/Job_back.png");
+	Background job("images/main_back.png");
+	job.push_sprite("images/game_page_1.png", 342, 184);
 	Button job_start("images/start_job_button.png", 745, 550, Color::Cyan);
 	job.push_button(job_start);
 
@@ -157,6 +164,17 @@ int main()
 		if (job)
 		{
 			job.draw(window);
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			{
+				while (Mouse::isButtonPressed(Mouse::Left))
+				{
+					continue;
+				}
+				std::cout << "rofl";
+				*active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;
+			}
 			if (job_start.is_click())
 			{
 				//game.draw(window);
@@ -165,6 +183,17 @@ int main()
 				active_window = &main_game.is_active;
 				*active_window = true;
 				continue;*/
+			}
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
+			{
+				while (Mouse::isButtonPressed(Mouse::Left))
+				{
+					continue;
+				}
+				std::cout << "rofl";
+				*active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;
 			}
 			/*if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
@@ -282,6 +311,7 @@ int main()
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
+			draw_relations(window,100, 100, 100);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
 				while (Mouse::isButtonPressed(Mouse::Left))

@@ -20,13 +20,14 @@ int mont(Player &player)
 	std::cout << " fafaf " << std::endl;
 	clock.restart();
 	window.setKeyRepeatEnabled(false);
-	Background game("images/Job_play.png");
+	Background game("images/main_back.png");
+	game.push_sprite("images/game_page_2.png",342,184);
 	size_t k = 0;
 	Text _k;
 	_k.setCharacterSize(100);
 	_k.setFillColor(Color::Black);
 	_k.setFont(font);
-	_k.setPosition(1325, 425);
+	_k.setPosition(1325 * x, 425 * y);
 	Texture texture;
 	Sprite text;
 	while (timer.asSeconds() < 20)
@@ -56,7 +57,9 @@ int mont(Player &player)
 			texture.loadFromFile("images/Game__but3.png");
 			text.setTexture(texture);
 		}
-		text.setPosition(800, 430);
+		text.setScale(x, y);
+		text.setPosition(800 * x, 430 * y);
+		_k.setScale(x, y);
 		window.draw(text);
 		window.draw(_k);
 		window.display();

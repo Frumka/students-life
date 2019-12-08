@@ -27,7 +27,7 @@ extern float x;
 extern float y;
 extern RenderWindow window;
 extern Sprite price;
-
+extern std::vector<std::string> com;
 void draw_shop(Player &player)
 {
 	shop.draw(window);
@@ -40,8 +40,7 @@ void draw_shop(Player &player)
 		str.setCharacterSize(30 * y);
 		str.setFont(font);
 		str.setPosition(shop.arr[i]->x_pos + 120*x, shop.arr[i]->y_pos + 142 * y);
-		std::string str1 = " Легко";
-		str.setString(" Легко");
+		str.setString(std::to_string(products[i]->price) + str_to_wstr(".Р"));
 		price.setPosition(shop.arr[i]->x_pos + 110*x , shop.arr[i]->y_pos + 130*y);
 		price.setScale(x, y);
 		window.draw(price);

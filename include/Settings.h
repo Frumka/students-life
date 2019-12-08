@@ -7,7 +7,7 @@ extern Background nastroyki;
 extern float x;
 extern float y;
 extern RenderWindow window;
-extern std::vector<std::string> com;
+std::vector<std::string> com = {"Легко","    Сложно","    Студент"};
 
 void sound_volume(float y_pos, Sprite& riska, int& volume)
 {
@@ -64,6 +64,7 @@ void Complexity(RenderWindow& window, int& index)
 	str.setFont(font);
 	str.setScale(x, y);
 	str.setPosition((638 + 342) * x, (184 + 554) * y);
-	str.setString(str_to_wstr(com[index]));
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	str.setString(converter.from_bytes(com[index]));
 	window.draw(str);
 }

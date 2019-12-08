@@ -139,7 +139,7 @@ public:
                 window.draw(text);
                 text.setString("");
                 text.setPosition(x * x_pos, y * y_pos);
-                str = "";
+                str = words[i];
             }
         }
         window.draw(text);

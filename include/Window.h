@@ -34,7 +34,7 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 	text.setFont(font);
 	text.setFillColor(a);
 	std::string str = "";
-	text.setCharacterSize(static_cast<unsigned int>(size*y));
+	text.setCharacterSize(static_cast<unsigned int>(size));
 	for (size_t i = 0; i < words.size(); i++)
 	{
 		str += words[i];
@@ -42,16 +42,15 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 		{
 			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 			std::wstring wstr = converter.from_bytes(str);
-
 			text.setString(wstr);
 		}
 		else
 		{
 			y_pos += text.getCharacterSize() * y;
 			window.draw(text);
-			text.setString("");
+			text.setString(words[i]);
 			text.setPosition(x * x_pos, y * y_pos);
-			str = "";
+			str = words[i];
 		}
 	}
 	window.draw(text);
