@@ -42,8 +42,7 @@ void draw_shop(Player &player)
 		str.setCharacterSize(30 * y);
 		str.setFont(font);
 		str.setPosition(shop.arr[i]->x_pos + 120*x, shop.arr[i]->y_pos + 142 * y);
-		std::string str1 = " Легко";
-        str.setString(std::to_string(products[i]->price) + str_to_wstr(str1));
+        str.setString(std::to_string(products[i]->price) + str_to_wstr(".р"));
 		price.setPosition(shop.arr[i]->x_pos + 110*x , shop.arr[i]->y_pos + 130*y);
 		price.setScale(x, y);
 		window.draw(price);
