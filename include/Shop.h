@@ -5,6 +5,7 @@
 
 using namespace sf;
 
+
 class product
 {
 public:
