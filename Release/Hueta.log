@@ -1,0 +1,11 @@
+﻿  Source.cpp
+C:\Users\kiril\source\repos\Hueta\Hueta\Source.cpp(14,70): warning C4244:  аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\kiril\source\repos\Hueta\Hueta\Source.cpp(14,42): warning C4244:  аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\kiril\source\repos\Hueta\Hueta\Source.cpp(28,70): warning C4244:  аргумент: преобразование "double" в "float", возможна потеря данных
+C:\Users\kiril\source\repos\Hueta\Hueta\Source.cpp(28,42): warning C4244:  аргумент: преобразование "double" в "float", возможна потеря данных
+  Создание кода
+  0 of 73 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  Hueta.vcxproj -> C:\Users\kiril\source\repos\Hueta\Release\Hueta.exe
