@@ -1,0 +1,15 @@
+{
+  "title": "Этот ивент невоможно получить",
+  "is_unique": true,
+  "text": "text",
+  "button_count": 1,
+  "buttons": [
+    {
+      "text": "text",
+      "event": "event",
+      "result_text": "result_text",
+      "next_event": "next_event",
+      "next_instant_event": "next_instant_event"
+    }
+  ]
+}

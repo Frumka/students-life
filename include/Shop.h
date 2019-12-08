@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "Head.h"
+#include "Head.hpp"
 
 using namespace sf;
 

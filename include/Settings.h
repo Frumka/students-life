@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Head.h"
+#include "Head.hpp"
 #include "Draw_windows.h"
 
 using namespace sf;

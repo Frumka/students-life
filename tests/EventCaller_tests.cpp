@@ -1,0 +1,42 @@
+//
+// Created by atrum on 08.12.19.
+//
+
+#include <gtest/gtest.h>
+#include "EventCaller.hpp"
+
+#define EvCaller EventCaller::getInstance()
+
+TEST(EventCaller, init) {
+    EXPECT_NO_THROW(EvCaller); //from standart EventList.json in ~/json_events
+
+    EXPECT_NO_THROW(EvCaller.set_EventList("tests/json_event_examples/EventList.json"));
+}
+
+TEST(EventCaller, is_event_unique) {
+    EXPECT_TRUE(EventCaller::is_event_unique("tests/json_event_examples/testing_event.json"));
+
+    EXPECT_FALSE(EventCaller::is_event_unique("tests/json_event_examples/unexpected_zachet.json"));
+}
+
+TEST(EventCaller, choose_random_ivent) {
+    std::string paths[] = {"tests/json_event_examples/testing_event.json",
+                           "tests/json_event_examples/unavailable_event.json",
+                           "tests/json_event_examples/unexpected_zachet.json"};
+
+    int choosed[] = {false, false, false};
+
+    EvCaller.set_EventList("tests/json_event_examples/EventList.json");
+
+    for (int i = 0; i < 10; i++) {
+        std::string path = EvCaller.choose_random_event();
+        for (int j = 0; j < 3; j++) {
+            if (path == paths[j])
+                choosed[j] += 1;
+        }
+    }
+
+    EXPECT_EQ(choosed[0], 1);
+    EXPECT_EQ(choosed[1], 0);
+    EXPECT_EQ(choosed[2], 9);
+}

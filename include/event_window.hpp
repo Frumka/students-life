@@ -7,7 +7,7 @@
 
 #include <event_processor.hpp>
 #include "Button.h"
-#include "Head.h"
+#include "Head.hpp"
 
 class event_button : public Button {
 private:
@@ -114,11 +114,7 @@ public:
 
     bool is_active = false;
 
-    EventWindow() = default;
-
-    EventWindow &operator=(const EventWindow &rhs) = default;
-
-    explicit EventWindow(event_processor &processor) {
+    EventWindow() {
         bg_texture.loadFromFile(bg_path);
         bg_sprite.setTexture(bg_texture);
         bg_sprite.scale(x, y);
@@ -127,7 +123,11 @@ public:
         cg_sprite.setTexture(cg_texture);
         cg_sprite.scale(x, y);
         cg_sprite.setPosition(342 * x, 184 * y);
+    };
 
+    EventWindow &operator=(const EventWindow &rhs) = default;
+
+    explicit EventWindow(event_processor &processor) : EventWindow() {
         update(processor);
     }
 
@@ -135,6 +135,9 @@ public:
         button_count = processor.saved_event["button_count"];
         description = processor.saved_event["text"];
         title = processor.saved_event["title"];
+
+        buttons.clear();
+
         for (int i = 0; i < button_count; i++) {
             std::function<void()> onclick = [i, &processor]() {
                 processor.execute_button(i);
@@ -182,7 +185,7 @@ public:
         text.setCharacterSize(static_cast<unsigned int>(size * y));
         for (size_t i = 0; i < words.size(); i++) {
             str += words[i];
-            if (text.getLocalBounds().width <= 1100 * x) {
+            if (text.getLocalBounds().width <= 1050 * x) {
                 text.setString(str_to_wstr(str));
             } else {
                 y_pos += (text.getCharacterSize() + 25) * y;

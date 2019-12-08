@@ -163,3 +163,16 @@ TEST(event_processor, load_event){
     EXPECT_EQ(processor.saved_event["text"], "Текст - описание события");
     EXPECT_EQ(processor.saved_event["button_count"], 4);
 }
+
+TEST(event_processor, load_after_load) {
+    event_processor processor;
+    processor.load_event("./tests/test_event.json");
+
+    EXPECT_EQ(processor.saved_event["text"], "Текст - описание события");
+    EXPECT_EQ(processor.saved_event["button_count"], 4);
+
+    processor.load_event("./tests/test2_event.json");
+
+    EXPECT_EQ(processor.saved_event["text"], "Текст второго файла");
+    EXPECT_EQ(processor.saved_event["button_count"], 1);
+}

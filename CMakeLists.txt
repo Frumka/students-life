@@ -46,11 +46,20 @@ include_directories(
 
 find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
 
+hunter_add_package(GTest)
+find_package(GTest CONFIG REQUIRED)
+
 add_executable(student-life-main Source.cpp)
+
+add_executable(student-life-tests tests/Time_handler_tests.cpp tests/EventCaller_tests.cpp)
 
 target_include_directories(student-life-main
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+
+target_include_directories(student-life-tests
+		PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+		)
 
 add_subdirectory(event_processor)
 
@@ -63,3 +72,8 @@ target_link_libraries(student-life-main
 		sfml-window
 		event_processor
 )
+
+target_link_libraries(student-life-tests
+		sfml-audio
+		sfml-system
+		GTest::main)

@@ -1,4 +1,4 @@
-﻿#include "Head.h"
+﻿#include "Head.hpp"
 #include <thread>
 #include <iomanip>
 #include "new_job.h"
@@ -8,19 +8,22 @@
 #include "event_window.hpp"
 #include "Relations.h"
 
+#include "EventCaller.hpp"
+#include "Time_handler_singleton.hpp"
+
+#define GlobalTimer Time_handler_singleton::getInstance()
+#define EvCaller EventCaller::getInstance()
 
 Background shop("images/main_back.png");
 Background nastroyki("images/main_back.png");
 
 Sprite price;
 Sprite riska2;
-//Sprite riska2;
-
 
 int main()
 {
 	Texture risq;
-	risq.loadFromFile("images/riska2.png");
+	risq.loadFromFile("images/riska_2.png");
 	riska2.setTexture(risq);
 	Player player;
 	///testovie prepodi
@@ -30,11 +33,10 @@ int main()
 			{"K",      K.acessor},
 			{"player", player.acessor}
 	};
-	/*event_processor processor;
+
+	event_processor processor;
 	processor.link_acessor(acessor);
-	processor.load_event("json_events/testing_event.json");
-	//std::cout<<std::setw(4)<<processor.saved_event;
-	EventWindow ivent(processor);*/
+
 	///end of test block
 	Texture p;
 
@@ -51,6 +53,9 @@ int main()
 	Button quite("images/Button_leave.png", 738, 670, Color::Cyan);
 	main_men.push_button(quite);
 	main_men.set_status(true);
+
+	Background event_answer_bg("images/main_back.png");
+	event_answer_bg.push_sprite("images/event_cg.png", 342, 184);
 
 	Background main_game("images/main.png");
 	Button charector_b("images/character_b.png", 192, 910, Color::Cyan);
@@ -147,18 +152,49 @@ int main()
 
 	int complexity = 0;
 
+	event_button last_pressed_button;
+	EventWindow last_active_event;
+	EventWindow ivent;
+	EvCaller.set_EventList("json_events/EventList.json");
+
+	bool event_is_called_on_cicle = true; //First event will happen after 10s
+
+	GlobalTimer.start();
+	GlobalTimer.freeze();
+
+	processor.load_event("json_events/SPECIAL_hello_student.json");
 
 	while (window.isOpen())
 	{
-		/*if (ivent)
-		{
-			ivent.draw(window);
-			draw_ivent(window, s, 800, 450, 280, 30, Color::Black);
-		}*/
+		float time = GlobalTimer.get_seconds();
+		//std::cout<<"time is: "<<time<<std::endl;
+
+		if (!event_is_called_on_cicle and time > 1) {
+			if (static_cast<int>(time) % 10 == 0) {
+				std::string path = EvCaller.choose_random_event();
+				std::cout << "path is: " << path << std::endl;
+				processor.load_event(EvCaller.choose_random_event());
+				event_is_called_on_cicle = true;
+
+				*active_window = false;
+				active_window = &ivent.is_active;
+				*active_window = true;
+			}
+		} else if (time > 6) {
+			if (static_cast<int>(time) % 5 == 0 and static_cast<int>(time) % 10 != 0) {
+				event_is_called_on_cicle = false;
+			}
+		}
+
+		ivent.update(processor);
+
+
+
 		sf::Event event;
 		window.pollEvent(event);
 		if (job)
 		{
+			GlobalTimer.freeze();
 			job.draw(window);
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
@@ -173,12 +209,7 @@ int main()
 			}
 			if (job_start.is_click())
 			{
-				//game.draw(window);
 				player.set_money(mont(player));
-				/**active_window = false;
-				active_window = &main_game.is_active;
-				*active_window = true;
-				continue;*/
 			}
 			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
 			{
@@ -191,30 +222,16 @@ int main()
 				active_window = &main_game.is_active;
 				*active_window = true;
 			}
-			/*if (!(IntRect(334, 132, 800, 500).contains(Mouse::getPosition(window))) && Mouse::isButtonPressed(Mouse::Left))
-			{
-				while (Mouse::isButtonPressed(Mouse::Left))
-				{
-					continue;
-				}
-				std::cout << "rofl";
-				*active_window = false;
-				active_window = &main_game.is_active;
-				*active_window = true;
-			}*/
-			//	jump();
-				/**active_window = false;
-				active_window = &main_game.is_active;
-				*active_window = true;*/
 		}
 		if (main_men)
 		{
+			GlobalTimer.freeze();
 
 			main_men.draw(window);
 			if (new_game.is_click())
 			{
 				*active_window = false;
-				//active_window = &ivent.is_active;
+				active_window = &ivent.is_active;
 				*active_window = true;
 			}
 			if (continue_game.is_click())
@@ -230,6 +247,7 @@ int main()
 		}
 		if (main_game)
 		{
+			GlobalTimer.unfreeze();
 			main_game.draw(window);
 			draw_money(window, player);
 			draw_health(window, player);
@@ -266,25 +284,57 @@ int main()
 			}
 
 		}
-		/*if (ivent) {
+		if (ivent) {
+			GlobalTimer.freeze();
 			ivent.draw(window);
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
-			std::cout << "A.mark = " << A.mark << std::endl;
-			std::cout << "A.name = " << A.name << std::endl;
-			for (auto e : ivent.buttons) {
+
+			for (auto e: ivent.buttons) {
 				if (e.is_click()) {
+					///tmp
+
 					e.execute();
+
+					last_pressed_button = e;
+					last_active_event = ivent;
+
 					*active_window = false;
-					active_window = &main_game.is_active;
+					active_window = &event_answer_bg.is_active;
 					*active_window = true;
 				}
 			}
-		}*/
+		}
+
+		if (event_answer_bg) {
+			GlobalTimer.freeze();
+			event_answer_bg.draw(window);
+
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
+
+			last_active_event.title_print(window);
+			last_pressed_button.text_prettyprint(window);
+
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) &&
+				Mouse::isButtonPressed(Mouse::Left)) {
+				while (Mouse::isButtonPressed(Mouse::Left)) {
+					continue;
+				}
+
+				*active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;
+			}
+
+		}
 
 		if (shop)
 		{
+			GlobalTimer.freeze();
+
 			draw_shop(player);
 			draw_money(window, player);
 			draw_health(window, player);
@@ -303,6 +353,8 @@ int main()
 		}
 		if (Otnoshenia)
 		{
+			GlobalTimer.freeze();
+
 			Otnoshenia.draw(window);
 			draw_money(window, player);
 			draw_health(window, player);
@@ -323,6 +375,8 @@ int main()
 
 		if (Charecter)
 		{
+			GlobalTimer.freeze();
+
 			Charecter.draw(window);
 			draw_money(window, player);
 			draw_health(window, player);
@@ -341,6 +395,8 @@ int main()
 		}
 		if (nastroyki)
 		{
+			GlobalTimer.freeze();
+
 			nastroyki.draw(window);
 			sound_volume(350, riska, set_volume);
 			//sound_volume(525, riska, set_volume);

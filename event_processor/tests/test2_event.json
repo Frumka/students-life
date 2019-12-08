@@ -1,0 +1,20 @@
+{
+  "text": "Текст второго файла",
+  "image_path": "Путь к картинке",
+  "button_count": 1,
+  "buttons": [
+    {
+      "text": "Текст - описание кнопки",
+      "event": [
+        "Aliev.mark=A",
+        "Konova.mark=K"
+      ]
+    },
+    {
+      "text": "second_button",
+      "event": "Aliev.mark=AA"
+    },
+    {},
+    {}
+  ]
+}
