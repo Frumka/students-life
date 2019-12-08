@@ -4,11 +4,18 @@ cmake_policy(SET CMP0074 NEW)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-HunterGate(
-        URL "https://github.com/ruslo/hunter/archive/v0.23.214.tar.gz"
-        SHA1 "e14bc153a7f16d6a5eeec845fb0283c8fad8c358"
+
+include("../tools/gate/cmake/HunterGate.cmake")
+
+set(HUNTER_CACHE_SERVERS
+		"https://github.com/bmstu-iu8-cpp-sem-3/hunter-cache"
+		CACHE STRING "Default cache server"
 )
 
+HunterGate(
+		URL "https://github.com/ruslo/hunter/archive/v0.23.214.tar.gz"
+		SHA1 "e14bc153a7f16d6a5eeec845fb0283c8fad8c358"
+)
 project(event_processor)
 #string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 #string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")

@@ -31,8 +31,8 @@ int main()
 	EventWindow ivent(processor);
 	///end of test block
 
-	com.emplace_back("   Легко");
-	com.emplace_back("   Норма");
+	com.emplace_back("Легко");
+	com.emplace_back("Норма");
 	com.emplace_back("Студент");
 	Texture p;
 	p.loadFromFile("images/price.png");
