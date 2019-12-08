@@ -13,13 +13,21 @@ class event_button : public Button{
 private:
     std::function<void()> onclick_event;
     std::wstring button_description;
+    std::string result_text;
+
 public:
-    event_button(float x, float y, std::function<void()> onclick, const std::wstring &button_text) :
+    event_button(float x, float y, std::function<void()> onclick, const std::wstring &button_text,
+                 const std::string &_result_text) :
             Button::Button("images/EventButton.png", x, y, Color::Cyan)
     {
         onclick_event = onclick;
         button_description = button_text;
+        result_text = _result_text;
     }
+
+    event_button() = default;
+
+    event_button &operator=(const event_button &rhs) = default;
 
     void draw_with_text(RenderWindow& window, int order){
         draw(window);
@@ -42,6 +50,44 @@ public:
         } else
             sprite.setColor(Color::White);
         window.draw(sprite);
+    }
+
+    void text_prettyprint(RenderWindow &window, int size = 32) {
+        std::string s = result_text;
+        auto x_pos = 360;
+        auto y_pos = 250;
+        s += " ";
+        size_t pos1 = 0;
+        size_t pos2 = 0;
+        std::vector<std::string> words;
+        for (size_t i = 0; i < s.size(); i++) {
+            if (s[i] == ' ') {
+                pos2 = i;
+                words.push_back(s.substr(pos1, pos2 - pos1));
+                pos1 = pos2;
+            }
+        }
+        Font font;
+        font.loadFromFile("CyrilicOld.TTF");
+        Text text;
+        text.setPosition(x * x_pos + 5, y * y_pos);
+        text.setFont(font);
+        text.setFillColor(Color::Black);
+        std::string str = "";
+        text.setCharacterSize(static_cast<unsigned int>(size * y));
+        for (size_t i = 0; i < words.size(); i++) {
+            str += words[i];
+            if (text.getLocalBounds().width <= 1100 * x) {
+                text.setString(str_to_wstr(str));
+            } else {
+                y_pos += (text.getCharacterSize() + 25) * y;
+                window.draw(text);
+                text.setString("");
+                text.setPosition(x * x_pos, y * y_pos);
+                str = "";
+            }
+        }
+        window.draw(text);
     }
 
     void execute(){
@@ -69,6 +115,10 @@ public:
 
     bool is_active = false;
 
+    EventWindow() = default;
+
+    EventWindow &operator=(const EventWindow &rhs) = default;
+
     explicit EventWindow(event_processor &processor){
         bg_texture.loadFromFile(bg_path);
         bg_sprite.setTexture(bg_texture);
@@ -94,7 +144,8 @@ public:
             std::wstring message = str_to_wstr(processor.saved_event["buttons"][i]["text"]);
 
             buttons.emplace_back(360, 184 + 350 + 88 * i,
-                                 onclick, str_to_wstr(processor.saved_event["buttons"][i]["text"]));
+                                 onclick, str_to_wstr(processor.saved_event["buttons"][i]["text"]),
+                                 processor.saved_event["buttons"][i]["result_text"]);
         }
     }
 

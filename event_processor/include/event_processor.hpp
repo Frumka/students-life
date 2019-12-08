@@ -100,13 +100,7 @@ public:
     }
 
     void execute_button(int button_number){
-        std::cout << saved_event << std::endl;
-        std::cout <<"text: " <<saved_event["buttons"][button_number]["text"];
-        std::cout << 2 << std::endl;
-        std::cout <<"text: " <<saved_event["buttons"][button_number]["event"];
         for(const auto &e :saved_event["buttons"][button_number]["event"]) {
-            std::cout <<"text: " <<saved_event["buttons"][button_number]["text"];
-            std::cout <<"text: " <<saved_event["buttons"][button_number]["event"];
             execute_string(e);
         }
     }

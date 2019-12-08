@@ -9,6 +9,7 @@
 
 Background shop("images/main_back.png");
 Background nastroyki("images/main_back.png");
+
 Sprite price;
 std::vector<std::string> com;
 
@@ -27,19 +28,22 @@ int main()
 	event_processor processor;
 	processor.link_acessor(acessor);
 	processor.load_event("json_events/testing_event.json");
-	//std::cout<<std::setw(4)<<processor.saved_event;
+
 	EventWindow ivent(processor);
 	///end of test block
 
     com.emplace_back("   Легко");
     com.emplace_back("   Норма");
 	com.emplace_back("Студент");
+
 	Texture p;
 	p.loadFromFile("images/price.png");
 	p.setSmooth(true);
 	price.setTexture(p);
+
 	extern sf::RenderWindow window;
 	window.setKeyRepeatEnabled(true);
+
 	Background main_men("images/main_menu_back.png");
 	Button new_game("images/Button_new_game.png", 738, 216, Color::Cyan);
 	main_men.push_button(new_game);
@@ -48,6 +52,9 @@ int main()
 	Button quite("images/Button_leave.png", 738, 670, Color::Cyan);
 	main_men.push_button(quite);
 	main_men.set_status(true);
+
+	Background event_answer_bg("images/main_back.png");
+	event_answer_bg.push_sprite("images/event_cg.png", 342, 184);
 
 	Background main_game("images/main.png");
 	Button charector_b("images/character_b.png", 192, 910, Color::Cyan);
@@ -144,6 +151,9 @@ int main()
 
 	int complexity = 0;
 
+
+	event_button last_pressed_button;
+	EventWindow last_active_event;
 
 	while (window.isOpen())
 	{
@@ -246,16 +256,42 @@ int main()
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
-			std::cout<<"A.mark = "<<A.mark<< std::endl;
-			std::cout<<"A.name = "<<A.name<< std::endl;
+
 			for(auto e: ivent.buttons){
 				if(e.is_click()){
 					e.execute();
+
+					last_pressed_button = e;
+					last_active_event = ivent;
+
 					*active_window = false;
-					active_window = &main_game.is_active;
+					active_window = &event_answer_bg.is_active;
 					*active_window = true;
 				}
 			}
+		}
+
+		if (event_answer_bg) {
+			event_answer_bg.draw(window);
+
+			draw_money(window, player);
+			draw_health(window, player);
+			draw_mood(window, player);
+
+			last_active_event.title_print(window);
+			last_pressed_button.text_prettyprint(window);
+
+			if (!(IntRect(342 * x, 184 * y, 1231 * x, 707 * y).contains(Mouse::getPosition(window))) &&
+				Mouse::isButtonPressed(Mouse::Left)) {
+				while (Mouse::isButtonPressed(Mouse::Left)) {
+					continue;
+				}
+
+				*active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;
+			}
+
 		}
 
 		if (shop)
@@ -270,7 +306,6 @@ int main()
 				{
 					continue;
 				}
-				std::cout << "rofl";
 				*active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;
@@ -288,7 +323,6 @@ int main()
 				{
 					continue;
 				}
-				std::cout << "rofl";
 				*active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;
@@ -307,7 +341,6 @@ int main()
 				{
 					continue;
 				}
-				std::cout << "rofl";
 				*active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;
@@ -328,7 +361,6 @@ int main()
 				{
 					continue;
 				}
-				std::cout << "rofl";
 				*active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;
@@ -340,7 +372,6 @@ int main()
 
 		if (event.type == event.KeyPressed && event.key.code == Keyboard::Escape)
 		{
-			std::cout << "Danya privet";
 			*active_window = false;
 			active_window = &main_men.is_active;
 			*active_window = true;

@@ -17,7 +17,7 @@ int mont(Player &player)
 	Time timer = seconds(1);
 	Font font;
 	font.loadFromFile("CyrilicOld.TTF");
-	std::cout << " fafaf " << std::endl;
+
 	clock.restart();
 	window.setKeyRepeatEnabled(false);
 	Background game("images/Job_play.png");
@@ -63,7 +63,6 @@ int mont(Player &player)
 		while (timer.asSeconds() < 20)
 		{
 			//window.display();
-			std::cout << money << std::endl;
 			Event event;
 			window.pollEvent(event);
 			if (event.type == Event::KeyPressed)
