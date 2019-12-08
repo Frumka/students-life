@@ -11,9 +11,8 @@ using namespace sf;
 extern float x;
 extern float y;
 
-<<<<<<< HEAD
-void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float y_pos,size_t size,Color a)
-{	
+void draw_ivent(RenderWindow& window, std::string s, float wid, float x_pos, float y_pos, size_t size, Color a)
+{
 
 	s += " ";
 	size_t pos1 = 0;
@@ -55,45 +54,6 @@ void draw_ivent(RenderWindow& window, std::string s,float wid,float x_pos,float 
 		}
 	}
 	window.draw(text);
-=======
-void draw_ivent(RenderWindow &window, std::string s, float wid, float x_pos, float y_pos, size_t size, Color a) {
-
-    s += " ";
-    size_t pos1 = 0;
-    size_t pos2 = 0;
-    std::vector<std::string> words;
-    for (size_t i = 0; i < s.size(); i++) {
-        if (s[i] == ' ') {
-            pos2 = i;
-            words.push_back(s.substr(pos1, pos2 - pos1));
-            pos1 = pos2;
-        }
-    }
-    Font font;
-    font.loadFromFile("CyrilicOld.TTF");
-    Text text;
-    text.setPosition(x * x_pos + 5, y * y_pos);
-    text.setFont(font);
-    text.setFillColor(a);
-    std::string str = "";
-    text.setCharacterSize(static_cast<unsigned int>(size * y));
-    for (size_t i = 0; i < words.size(); i++) {
-        str += words[i];
-        if (text.getLocalBounds().width <= wid) {
-            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-            std::wstring wstr = converter.from_bytes(str);
-
-            text.setString(wstr);
-        } else {
-            y_pos += text.getCharacterSize() * y;
-            window.draw(text);
-            text.setString("");
-            text.setPosition(x * x_pos, y * y_pos);
-            str = "";
-        }
-    }
-    window.draw(text);
->>>>>>> ee4b0817cd57135e1ea08debefe6ffe5a9f725b9
 }
 
 void draw_money(RenderWindow &window, const Player &player) {

@@ -9,32 +9,8 @@
 using namespace sf;
 
 
-int mont(Player &player) {
+int mont(Player& player) {
 
-    int money = player.get_money();
-    extern RenderWindow window;
-    srand(time(0));
-    Clock clock;
-    Time timer = seconds(1);
-    Font font;
-    font.loadFromFile("CyrilicOld.TTF");
-
-    clock.restart();
-    window.setKeyRepeatEnabled(false);
-    Background game("images/Job_play.png");
-    size_t k = 0;
-    Text _k;
-    _k.setCharacterSize(100);
-    _k.setFillColor(Color::Black);
-    _k.setFont(font);
-    _k.setPosition(1325, 425);
-    Texture texture;
-    Sprite text;
-    while (timer.asSeconds() < 20) {
-        game.draw(window);
-        bool flag = true;
-
-<<<<<<< HEAD
 	int money = player.get_money();
 	extern RenderWindow window;
 	srand(time(0));
@@ -42,238 +18,169 @@ int mont(Player &player) {
 	Time timer = seconds(1);
 	Font font;
 	font.loadFromFile("CyrilicOld.TTF");
-	std::cout << " fafaf " << std::endl;
+
 	clock.restart();
 	window.setKeyRepeatEnabled(false);
-	Background game("images/main_back.png");
-	game.push_sprite("images/game_page_2.png",342,184);
+	Background game("images/Job_play.png");
 	size_t k = 0;
 	Text _k;
 	_k.setCharacterSize(100);
 	_k.setFillColor(Color::Black);
 	_k.setFont(font);
-	_k.setPosition(1325 * x, 425 * y);
+	_k.setPosition(1325, 425);
 	Texture texture;
 	Sprite text;
-	while (timer.asSeconds() < 20)
-	{
+	while (timer.asSeconds() < 20) {
 		game.draw(window);
 		bool flag = true;
-		
-		//bool push = true;
-		size_t i = std::rand() % 4;
-		if (i == 0)
-		{
-			texture.loadFromFile("images/Game__but0.png");
-			text.setTexture(texture);
-		}
-		if (i == 1)
-		{
-			texture.loadFromFile("images/Game__but1.png");
-			text.setTexture(texture);
-		}
-		if (i == 2)
-		{
-			texture.loadFromFile("images/Game__but2.png");
-			text.setTexture(texture);
-		}
-		if (i == 3)
-		{
-			texture.loadFromFile("images/Game__but3.png");
-			text.setTexture(texture);
-		}
-		text.setScale(x, y);
-		text.setPosition(800 * x, 430 * y);
-		_k.setScale(x, y);
-		window.draw(text);
-		window.draw(_k);
-		window.display();
+		int money = player.get_money();
+		extern RenderWindow window;
+		srand(time(0));
+		Clock clock;
+		Time timer = seconds(1);
+		Font font;
+		font.loadFromFile("CyrilicOld.TTF");
+		std::cout << " fafaf " << std::endl;
+		clock.restart();
+		window.setKeyRepeatEnabled(false);
+		Background game("images/main_back.png");
+		game.push_sprite("images/game_page_2.png", 342, 184);
+		size_t k = 0;
+		Text _k;
+		_k.setCharacterSize(100);
+		_k.setFillColor(Color::Black);
+		_k.setFont(font);
+		_k.setPosition(1325 * x, 425 * y);
+		Texture texture;
+		Sprite text;
 		while (timer.asSeconds() < 20)
 		{
-			//window.display();
-			std::cout << money << std::endl;
-			Event event;
-			window.pollEvent(event);
-			if (event.type == Event::KeyPressed)
+			game.draw(window);
+			bool flag = true;
+
+			//bool push = true;
+			size_t i = std::rand() % 4;
+			if (i == 0)
 			{
-				if (i == 0 && event.key.code == Keyboard::Left)
+				texture.loadFromFile("images/Game__but0.png");
+				text.setTexture(texture);
+			}
+			if (i == 1)
+			{
+				texture.loadFromFile("images/Game__but1.png");
+				text.setTexture(texture);
+			}
+			if (i == 2)
+			{
+				texture.loadFromFile("images/Game__but2.png");
+				text.setTexture(texture);
+			}
+			if (i == 3)
+			{
+				texture.loadFromFile("images/Game__but3.png");
+				text.setTexture(texture);
+			}
+			text.setScale(x, y);
+			text.setPosition(800 * x, 430 * y);
+			_k.setScale(x, y);
+			window.draw(text);
+			window.draw(_k);
+			window.display();
+			while (timer.asSeconds() < 20)
+			{
+				//window.display();
+				std::cout << money << std::endl;
+				Event event;
+				window.pollEvent(event);
+				if (event.type == Event::KeyPressed)
 				{
-					timer = clock.getElapsedTime();
-					while (event.type == event.KeyPressed)
-					{
-						if (timer.asSeconds() > 20)
-							break;
-						window.pollEvent(event);
-						continue;
-					}
-					k++;
-					_k.setString(std::to_string(k));
-					money += 100;
-					break;
-				}
-				if (i == 1 && event.key.code == Keyboard::Up)
-				{
-					//window.display();
-					timer = clock.getElapsedTime();
-					while (event.type == event.KeyPressed)
-					{
-						if (timer.asSeconds() > 20)
-							break;
-						window.pollEvent(event);
-						continue;
-					}
-					k++;
-					_k.setString(std::to_string(k));
-					money += 100;
-					break;
-				}
-				if (i == 2 && event.key.code == Keyboard::Right)
-				{
-					//window.display();
-					timer = clock.getElapsedTime();
-					while (event.type == event.KeyPressed)
-					{
-						if (timer.asSeconds() > 20)
-							break;
-						window.pollEvent(event);
-						continue;
-					}
-					k++;
-					_k.setString(std::to_string(k));
-					money += 100;
-					break;
-				}
-				if (i == 3 && event.key.code == Keyboard::Down)
-				{
-					//window.display();
-					timer = clock.getElapsedTime();
-					while (event.type == event.KeyPressed)
-					{
-						if (timer.asSeconds() > 20)
-							break;
-						window.pollEvent(event);
-						continue;
-					}
-					k++;
-					_k.setString(std::to_string(k));
-					money += 100;
-					break;
-				}
-				else
-				{
-					//window.display();
-					while (event.type == event.KeyPressed)
+					if (i == 0 && event.key.code == Keyboard::Left)
 					{
 						timer = clock.getElapsedTime();
-						if (timer.asSeconds() > 20)
-							break;
-						window.pollEvent(event);
-						continue;
+						while (event.type == event.KeyPressed)
+						{
+							if (timer.asSeconds() > 20)
+								break;
+							window.pollEvent(event);
+							continue;
+						}
+						k++;
+						_k.setString(std::to_string(k));
+						money += 100;
+						break;
 					}
-=======
-        //bool push = true;
-        size_t i = std::rand() % 4;
-        if (i == 0) {
-            texture.loadFromFile("images/Game__but0.png");
-            text.setTexture(texture);
-        }
-        if (i == 1) {
-            texture.loadFromFile("images/Game__but1.png");
-            text.setTexture(texture);
-        }
-        if (i == 2) {
-            texture.loadFromFile("images/Game__but2.png");
-            text.setTexture(texture);
-        }
-        if (i == 3) {
-            texture.loadFromFile("images/Game__but3.png");
-            text.setTexture(texture);
-        }
-        text.setPosition(800, 430);
-        window.draw(text);
-        window.draw(_k);
-        window.display();
-        while (timer.asSeconds() < 20) {
-            //window.display();
-            Event event;
-            window.pollEvent(event);
-            if (event.type == Event::KeyPressed) {
-                if (i == 0 && event.key.code == Keyboard::Left) {
-                    timer = clock.getElapsedTime();
-                    while (event.type == event.KeyPressed) {
-                        if (timer.asSeconds() > 20)
-                            break;
-                        window.pollEvent(event);
-                        continue;
-                    }
-                    k++;
-                    _k.setString(std::to_string(k));
-                    money += 100;
-                    break;
-                }
-                if (i == 1 && event.key.code == Keyboard::Up) {
-                    //window.display();
-                    timer = clock.getElapsedTime();
-                    while (event.type == event.KeyPressed) {
-                        if (timer.asSeconds() > 20)
-                            break;
-                        window.pollEvent(event);
-                        continue;
-                    }
-                    k++;
-                    _k.setString(std::to_string(k));
-                    money += 100;
-                    break;
-                }
-                if (i == 2 && event.key.code == Keyboard::Right) {
-                    //window.display();
-                    timer = clock.getElapsedTime();
-                    while (event.type == event.KeyPressed) {
-                        if (timer.asSeconds() > 20)
-                            break;
-                        window.pollEvent(event);
-                        continue;
-                    }
-                    k++;
-                    _k.setString(std::to_string(k));
-                    money += 100;
-                    break;
-                }
-                if (i == 3 && event.key.code == Keyboard::Down) {
-                    //window.display();
-                    timer = clock.getElapsedTime();
-                    while (event.type == event.KeyPressed) {
-                        if (timer.asSeconds() > 20)
-                            break;
-                        window.pollEvent(event);
-                        continue;
-                    }
-                    k++;
-                    _k.setString(std::to_string(k));
-                    money += 100;
-                    break;
-                } else {
-                    //window.display();
-                    while (event.type == event.KeyPressed) {
-                        timer = clock.getElapsedTime();
-                        if (timer.asSeconds() > 20)
-                            break;
-                        window.pollEvent(event);
-                        continue;
-                    }
->>>>>>> ee4b0817cd57135e1ea08debefe6ffe5a9f725b9
+					if (i == 1 && event.key.code == Keyboard::Up)
+					{
+						//window.display();
+						timer = clock.getElapsedTime();
+						while (event.type == event.KeyPressed)
+						{
+							if (timer.asSeconds() > 20)
+								break;
+							window.pollEvent(event);
+							continue;
+						}
+						k++;
+						_k.setString(std::to_string(k));
+						money += 100;
+						break;
+					}
+					if (i == 2 && event.key.code == Keyboard::Right)
+					{
+						//window.display();
+						timer = clock.getElapsedTime();
+						while (event.type == event.KeyPressed)
+						{
+							if (timer.asSeconds() > 20)
+								break;
+							window.pollEvent(event);
+							continue;
+						}
+						k++;
+						_k.setString(std::to_string(k));
+						money += 100;
+						break;
+					}
+					if (i == 3 && event.key.code == Keyboard::Down)
+					{
+						//window.display();
+						timer = clock.getElapsedTime();
+						while (event.type == event.KeyPressed)
+						{
+							if (timer.asSeconds() > 20)
+								break;
+							window.pollEvent(event);
+							continue;
+						}
+						k++;
+						_k.setString(std::to_string(k));
+						money += 100;
+						break;
+					}
+					else
+					{
+						//window.display();
+						while (event.type == event.KeyPressed)
+						{
+							timer = clock.getElapsedTime();
+							if (timer.asSeconds() > 20)
+								break;
+							window.pollEvent(event);
+							continue;
+						}
 
-                    money -= 100;
-                    break;
-                }
-            }
-            timer = clock.getElapsedTime();
+						money -= 100;
+						break;
+					}
+				}
+				timer = clock.getElapsedTime();
 
-            if (timer.asSeconds() > 20)
-                break;
-        }
-        timer = clock.getElapsedTime();
-        // window.display();
-    }
-    return money;
+				if (timer.asSeconds() > 20)
+					break;
+			}
+			timer = clock.getElapsedTime();
+			// window.display();
+		}
+		return money;
+	}
 }

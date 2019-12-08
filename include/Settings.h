@@ -37,7 +37,6 @@ void sound_volume(float y_pos, Sprite &riska, int &volume) {
     window.draw(riska);
 }
 
-<<<<<<< HEAD
 void Complexity(RenderWindow& window, int& index)
 {
 	if (nastroyki.arr[0]->is_click())
@@ -66,27 +65,5 @@ void Complexity(RenderWindow& window, int& index)
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	str.setString(converter.from_bytes(com[index]));
 	window.draw(str);
-=======
-void Complexity(RenderWindow &window, int &index) {
-    if (nastroyki.arr[0]->is_click()) {
-        if (index == 0) {
-            index = 2;
-        } else {
-            index--;
-        }
-    }
-    if (nastroyki.arr[1]->is_click()) {
-        index = (index + 1) % 3;
-    }
-    Text str;
-    Font font;
-    font.loadFromFile("CyrilicOld.TTF");
-    str.setFillColor(Color::Black);
-    str.setCharacterSize(80);
-    str.setFont(font);
-    str.setScale(x, y);
-    str.setPosition((638 + 342) * x, (184 + 554) * y);
-    str.setString(str_to_wstr(com[index]));
-    window.draw(str);
->>>>>>> ee4b0817cd57135e1ea08debefe6ffe5a9f725b9
+
 }
