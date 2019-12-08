@@ -20,15 +20,16 @@
     };
  *
  */
-class prepod{
+class prepod {
 public:
     std::string name;
     std::string mark = "2";
-    std::map<std::string, std::string*> acessor = {
+    std::map<std::string, std::string *> acessor = {
             {"mark", &mark},
             {"name", &name}
     };
-    prepod(std::string _name, std::string _mark){
+
+    prepod(std::string _name, std::string _mark) {
         name = _name;
         mark = _mark;
     }

@@ -9,7 +9,7 @@
 #include "Button.h"
 #include "Head.h"
 
-class event_button : public Button{
+class event_button : public Button {
 private:
     std::function<void()> onclick_event;
     std::wstring button_description;
@@ -18,8 +18,7 @@ private:
 public:
     event_button(float x, float y, std::function<void()> onclick, const std::wstring &button_text,
                  const std::string &_result_text) :
-            Button::Button("images/EventButton.png", x, y, Color::Cyan)
-    {
+            Button::Button("images/EventButton.png", x, y, Color::Cyan) {
         onclick_event = onclick;
         button_description = button_text;
         result_text = _result_text;
@@ -29,7 +28,7 @@ public:
 
     event_button &operator=(const event_button &rhs) = default;
 
-    void draw_with_text(RenderWindow& window, int order){
+    void draw_with_text(RenderWindow &window, int order) {
         draw(window);
 
         Font font;
@@ -90,12 +89,12 @@ public:
         window.draw(text);
     }
 
-    void execute(){
+    void execute() {
         onclick_event();
     }
 };
 
-class EventWindow{
+class EventWindow {
 private:
     std::string bg_path = "images/main_back.png";
     sf::Texture bg_texture;
@@ -119,7 +118,7 @@ public:
 
     EventWindow &operator=(const EventWindow &rhs) = default;
 
-    explicit EventWindow(event_processor &processor){
+    explicit EventWindow(event_processor &processor) {
         bg_texture.loadFromFile(bg_path);
         bg_sprite.setTexture(bg_texture);
         bg_sprite.scale(x, y);
@@ -132,12 +131,12 @@ public:
         update(processor);
     }
 
-    void update(event_processor& processor){
+    void update(event_processor &processor) {
         button_count = processor.saved_event["button_count"];
         description = processor.saved_event["text"];
         title = processor.saved_event["title"];
-        for(int i = 0; i < button_count; i++){
-            std::function<void()> onclick = [i, &processor](){
+        for (int i = 0; i < button_count; i++) {
+            std::function<void()> onclick = [i, &processor]() {
                 processor.execute_button(i);
             };
 
@@ -196,18 +195,17 @@ public:
         window.draw(text);
     }
 
-    void draw(RenderWindow& window){
+    void draw(RenderWindow &window) {
         window.draw(bg_sprite);
         window.draw(cg_sprite);
         title_print(window);
         text_prettyprint(window);
-        for(int i = 0; i<buttons.size(); i++){
+        for (int i = 0; i < buttons.size(); i++) {
             buttons[i].draw_with_text(window, i);
         }
     }
 
-    operator bool() const
-    {
+    operator bool() const {
         return is_active;
     }
 };
