@@ -17,6 +17,7 @@ elseif(WIN64)
 
 else()
 	add_subdirectory(SFML/SFML-src)
+	set(IS_BUILDING_SFML TRUE)
 
 endif()
 
@@ -33,17 +34,17 @@ HunterGate(
 )
 
 project(student-life-main)
-
-link_directories(
+if(NOT IS_BUILDING_SFML)
+	link_directories(
 		SFML_LIBRARY_DIR
-)
+	)
 
-include_directories(
+	include_directories(
 		SFML_INCLUDE_DIR
-)
+	)
 
-find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
-
+	find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
+endif()
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
