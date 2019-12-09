@@ -1,4 +1,5 @@
 {
-  "json_events/testing_event.json": true,
-  "json_events/unexpected_zachet.json": true
+  "json_events/med.json" : true,
+  "json_events/testing_event.json": false,
+  "json_events/unexpected_zachet.json": false
 }

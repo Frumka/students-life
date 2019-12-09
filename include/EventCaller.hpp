@@ -67,6 +67,8 @@ private:
     ~EventCaller() = default;
 
 public:
+    json event_list;
+
     EventCaller(const EventCaller &) = delete;
 
     EventCaller &operator=(EventCaller &) = delete;
@@ -76,12 +78,18 @@ public:
         return instance;
     }
 
-    json event_list;
+    void update_EventList(const std::string &key, bool is_available){
+        if(key != "none"){
+            event_list[key] = is_available;
+        }
+    }
 
     void set_EventList(const std::string &path_to_EventList = "json_events/EventList.json") {
         std::ifstream ifs(path_to_EventList);
         event_list = json::parse(ifs);
         event_number = event_list.size();
+
+        std::cerr<<std::setw(4)<<event_list<<std::endl;
 
         event_paths.resize(event_number);
 

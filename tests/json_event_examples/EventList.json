@@ -1,5 +1,5 @@
 {
+  "tests/json_event_examples/unavailable_event.json": false,
   "tests/json_event_examples/testing_event.json": true,
-  "tests/json_event_examples/unexpected_zachet.json": true,
-  "tests/json_event_examples/unavailable_event.json": false
+  "tests/json_event_examples/unexpected_zachet.json": true
 }

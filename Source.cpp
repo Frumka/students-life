@@ -178,7 +178,7 @@ int main()
 			if (static_cast<int>(time) % 10 == 0) {
 				std::string path = EvCaller.choose_random_event();
 				std::cout << "path is: " << path << std::endl;
-				processor.load_event(EvCaller.choose_random_event());
+				processor.load_event(path);
 				event_is_called_on_cicle = true;
 
 				*active_window = false;
@@ -309,7 +309,11 @@ int main()
 				if (e.is_click()) {
 					///tmp
 
-					e.execute();
+					auto path_to_updated_event = e.execute();
+					
+					if(path_to_updated_event != "none"){
+						EvCaller.update_EventList(path_to_updated_event, true);
+					}
 
 					last_pressed_button = e;
 					last_active_event = ivent;
