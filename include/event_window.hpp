@@ -76,14 +76,14 @@ public:
         text.setCharacterSize(static_cast<unsigned int>(size * y));
         for (size_t i = 0; i < words.size(); i++) {
             str += words[i];
-            if (text.getLocalBounds().width <= 1100 * x) {
+            if (text.getLocalBounds().width <= 1050 * x) {
                 text.setString(str_to_wstr(str));
             } else {
                 y_pos += (text.getCharacterSize() + 25) * y;
                 window.draw(text);
                 text.setString("");
                 text.setPosition(x * x_pos, y * y_pos);
-                str = "";
+                str = words[i];
             }
         }
         window.draw(text);

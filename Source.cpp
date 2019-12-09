@@ -249,6 +249,8 @@ int main()
 		{
 			GlobalTimer.unfreeze();
 			main_game.draw(window);
+
+			draw_date(window, GlobalTimer.get_seconds());
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
@@ -287,6 +289,8 @@ int main()
 		if (ivent) {
 			GlobalTimer.freeze();
 			ivent.draw(window);
+
+			draw_date(window, GlobalTimer.get_seconds());
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
@@ -311,6 +315,7 @@ int main()
 			GlobalTimer.freeze();
 			event_answer_bg.draw(window);
 
+			draw_date(window, GlobalTimer.get_seconds());
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);
@@ -399,7 +404,7 @@ int main()
 
 			nastroyki.draw(window);
 			sound_volume(350, riska, set_volume);
-			//sound_volume(525, riska, set_volume);
+
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);

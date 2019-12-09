@@ -11,58 +11,24 @@ using namespace sf;
 extern float x;
 extern float y;
 
-void draw_ivent(RenderWindow& window, std::string s, float wid, float x_pos, float y_pos, size_t size, Color a)
-{
 
-	s += " ";
-	size_t pos1 = 0;
-	size_t pos2 = 0;
-	std::vector<std::string> words;
-	for (size_t i = 0; i < s.size(); i++)
-	{
-		if (s[i] == ' ')
-		{
-			pos2 = i;
-			words.push_back(s.substr(pos1, pos2 - pos1));
-			pos1 = pos2;
-		}
-	}
-	Font font;
-	font.loadFromFile("CyrilicOld.TTF");
-	Text text;
-	text.setPosition(x * x_pos + 5, y * y_pos);
-	text.setFont(font);
-	text.setFillColor(a);
-	std::string str = "";
-	text.setCharacterSize(static_cast<unsigned int>(size));
-	for (size_t i = 0; i < words.size(); i++)
-	{
-		str += words[i];
-		if (text.getLocalBounds().width <= wid)
-		{
-			std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-			std::wstring wstr = converter.from_bytes(str);
-			text.setString(wstr);
-		}
-		else
-		{
-			y_pos += text.getCharacterSize() * y;
-			window.draw(text);
-			text.setString(words[i]);
-			text.setPosition(x * x_pos, y * y_pos);
-			str = words[i];
-		}
-	}
-	window.draw(text);
+void draw_date(RenderWindow &window, float seconds) {
+    Font font;
+    font.loadFromFile("CyrilicOld.TTF");
+    std::string date = "День " + std::to_string(static_cast<int>(seconds) / 4);
+    Text text(str_to_wstr(date), font, 45 * y);
+    text.setFillColor(sf::Color::Black);
+
+    text.setPosition(1300 * x, 100 * y);
+    window.draw(text);
 }
 
 void draw_money(RenderWindow &window, const Player &player) {
     Font font;//�����
-    font.loadFromFile("CyrilicOld.TTF");//�������� ������ ������ ���� ������
-    Text text(std::to_string(player.get_money()), font, 45 *
-                                                        y);//������� ������ �����. ���������� � ������ ����� ������, �����, ������ ������(� ��������);//��� ������ ����� (�� ������)
+    font.loadFromFile("CyrilicOld.TTF");
+    Text text(std::to_string(player.get_money()), font, 45 * y);
     text.setFillColor(Color(0, 145, 26, 255));
-//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);//������ � ������������ �����. �� ��������� �� "�����":)) � �� ������������
+//	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     text.setPosition(1690 * x, 372 * y);
     window.draw(text);
 }
