@@ -14,6 +14,9 @@ using json = nlohmann::json;
 
 class EventCaller {
 private:
+    std::vector<std::pair<std::string, bool>> event_paths;
+    json event_list;
+
     uint64_t event_number;
 
     std::string choose_from_available(int max_tries = 10) {
@@ -42,8 +45,7 @@ private:
             if (!is_event_unique(element.first))
                 return element.first;
         }
-    }
-/*
+
         ///tries to take first not unique event
         for (const auto &e:event_paths) {
             if (!is_event_unique(e.first))
@@ -53,7 +55,7 @@ private:
         ///finally takes random event
         return event_paths[rand(rng)].first;
     }
-*/
+
     void update_paths() {
         int i = 0;
         for (auto it = event_list.begin(); it != event_list.end(); it++) {
@@ -66,9 +68,6 @@ private:
     ~EventCaller() = default;
 
 public:
-    std::vector<std::pair<std::string, bool>> event_paths;
-    json event_list;
-
     EventCaller(const EventCaller &) = delete;
 
     EventCaller &operator=(EventCaller &) = delete;
