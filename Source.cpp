@@ -46,6 +46,9 @@ int main()
 	price.setTexture(p);
 	extern sf::RenderWindow window;
 	window.setKeyRepeatEnabled(true);
+
+	Background death_screen("images/death_screen.png");
+
 	Background main_men("images/main_menu_back.png");
 	Button new_game("images/Button_new_game.png", 738, 216, Color::Cyan);
 	main_men.push_button(new_game);
@@ -132,7 +135,7 @@ int main()
 	bool* active_window;
 	active_window = &main_men.is_active;
 
-	//Music music;
+	Music music;
 	//music.openFromFile("music/1565802332_antoha-ms-tokye.ogg");
 	//music.play();
 	//music.setVolume(0);
@@ -165,8 +168,44 @@ int main()
 
 	processor.load_event("json_events/SPECIAL_hello_student.json");
 	bool flag = false;
+
+	bool saved_by_gf = false;
+	bool saved_by_friends = false;
 	while (window.isOpen())
 	{
+		if (player.get_health() < 0){
+			if(player.get_friends() >= 50 and !saved_by_friends){
+				saved_by_friends = true;
+				processor.load_event("json_events/SPECIAL_death_save_friends.json");
+				event_is_called_on_cicle = true;
+
+				*active_window = false;
+				active_window = &ivent.is_active;
+				*active_window = true;
+			} else {
+				*active_window = false;
+				active_window = &death_screen.is_active;
+				*active_window = true;
+			}
+		}
+
+		if (player.get_mood() < 0){
+			if(player.get_girlfriend() >= 50 and !saved_by_gf){
+				saved_by_friends = true;
+				processor.load_event("json_events/SPECIAL_death_save_gf.json");
+				event_is_called_on_cicle = true;
+
+				*active_window = false;
+				active_window = &ivent.is_active;
+				*active_window = true;
+			} else {
+				*active_window = false;
+				active_window = &death_screen.is_active;
+				*active_window = true;
+			}
+		}
+
+
 		if (data % 7 == 0 && flag)
 		{
 			player.set_health(player.get_health() - 10);
@@ -196,6 +235,41 @@ int main()
 
 		sf::Event event;
 		window.pollEvent(event);
+
+		if (main_men)
+		{
+			GlobalTimer.freeze();
+
+			main_men.draw(window);
+			if (new_game.is_click())
+			{
+				GlobalTimer.start();
+				EvCaller.set_EventList("json_events/EventList.json");
+
+				processor.load_event("json_events/SPECIAL_hello_student.json");
+
+				ivent.update(processor);
+				player.set_health(50);
+				player.set_money(2000);
+				player.set_mood(50);
+				event_is_called_on_cicle = true;
+
+				*active_window = false;
+				active_window = &ivent.is_active;
+				*active_window = true;
+			}
+			if (continue_game.is_click())
+			{
+				*active_window = false;
+				active_window = &main_game.is_active;
+				*active_window = true;
+			}
+			if (quite.is_click())
+			{
+				button_extit();
+			}
+		}
+
 		if (job)
 		{
 			GlobalTimer.freeze();
@@ -225,28 +299,6 @@ int main()
 				*active_window = false;
 				active_window = &main_game.is_active;
 				*active_window = true;
-			}
-		}
-		if (main_men)
-		{
-			GlobalTimer.freeze();
-
-			main_men.draw(window);
-			if (new_game.is_click())
-			{
-				*active_window = false;
-				active_window = &ivent.is_active;
-				*active_window = true;
-			}
-			if (continue_game.is_click())
-			{
-				*active_window = false;
-				active_window = &main_game.is_active;
-				*active_window = true;
-			}
-			if (quite.is_click())
-			{
-				button_extit();
 			}
 		}
 		if (main_game)
@@ -342,9 +394,24 @@ int main()
 					continue;
 				}
 
-				*active_window = false;
-				active_window = &main_game.is_active;
-				*active_window = true;
+				if(last_pressed_button.button_json["next_event"] != "none"){
+					EvCaller.set_next(last_pressed_button.button_json["next_event"]);
+				}
+
+				if(last_pressed_button.button_json["next_instant_event"] != "none"){
+					processor.load_event(last_pressed_button.button_json["next_instant_event"]);
+					ivent.update(processor);
+
+					*active_window = false;
+					active_window = &ivent.is_active;
+					*active_window = true;
+
+				} else {
+
+					*active_window = false;
+					active_window = &main_game.is_active;
+					*active_window = true;
+				}
 			}
 
 		}
@@ -434,13 +501,17 @@ int main()
 				*active_window = true;
 			}
 		}
+		if(death_screen){
+			GlobalTimer.freeze();
+			death_screen.draw(window);
+		}
+
 
 		if (event.type == sf::Event::Closed)
 			window.close();
 
 		if (event.type == event.KeyPressed && event.key.code == Keyboard::Escape)
 		{
-			std::cout << "Danya privet";
 			*active_window = false;
 			active_window = &main_men.is_active;
 			*active_window = true;

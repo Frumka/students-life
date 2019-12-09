@@ -62,7 +62,10 @@ public:
         return acessor[str];
     }
 
-    const void execute_string(const std::string &command) {
+    void execute_string(const std::string &command) {
+        if(command == "none")
+            return;
+
         std::string operation;
 
         if (is_inside(command, "+="))
