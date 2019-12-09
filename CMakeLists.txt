@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.4)
 cmake_policy(SET CMP0074 NEW)
 set(CMAKE_CXX_STANDARD 14)
 
+option(BUILD_COVERAGE "Build coverage" OFF)
+
 if(UNIX AND NOT APPLE)
 	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-deb/include")
 
@@ -73,3 +75,6 @@ target_link_libraries(student-life-tests
 		sfml-audio
 		sfml-system
 		GTest::main)
+
+enable_testing()
+add_test(NAME unit_tests COMMAND tests)
