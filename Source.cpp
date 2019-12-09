@@ -22,6 +22,7 @@ Sprite riska2;
 
 int main()
 {
+	int data = 0;
 	Texture risq;
 	risq.loadFromFile("images/riska_2.png");
 	riska2.setTexture(risq);
@@ -163,9 +164,13 @@ int main()
 	GlobalTimer.freeze();
 
 	processor.load_event("json_events/SPECIAL_hello_student.json");
-
+	bool flag = false;
 	while (window.isOpen())
 	{
+		if (data % 7 == 0 && flag)
+		{
+			player.set_health(player.get_health() - 10);
+		}
 		float time = GlobalTimer.get_seconds();
 		//std::cout<<"time is: "<<time<<std::endl;
 
@@ -249,8 +254,13 @@ int main()
 		{
 			GlobalTimer.unfreeze();
 			main_game.draw(window);
-
-			draw_date(window, GlobalTimer.get_seconds());
+			int past_data = data;
+			data = draw_date(window, GlobalTimer.get_seconds());
+			if (past_data - data == 0)
+			{
+				flag = false;
+			}
+			else flag = true;
 			draw_money(window, player);
 			draw_health(window, player);
 			draw_mood(window, player);

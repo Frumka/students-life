@@ -12,15 +12,15 @@ extern float x;
 extern float y;
 
 
-void draw_date(RenderWindow &window, float seconds) {
+int draw_date(RenderWindow &window, float seconds) {
     Font font;
     font.loadFromFile("CyrilicOld.TTF");
     std::string date = "День " + std::to_string(static_cast<int>(seconds) / 4);
     Text text(str_to_wstr(date), font, 45 * y);
     text.setFillColor(sf::Color::Black);
-
     text.setPosition(1300 * x, 100 * y);
     window.draw(text);
+	return static_cast<int>(seconds) / 4;
 }
 
 void draw_money(RenderWindow &window, const Player &player) {
