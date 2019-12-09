@@ -12,28 +12,32 @@
       ],
       "result_text": "Хехехехе...",
       "next_event": "путь у файлу ивента, который нужно вызвать при следующем вызове эвента через время, none если такого нет",
-      "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет"
+      "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет",
+      "set_available_event": "none"
     },
     {
       "text": "За же*у",
       "event": "player.mood-=10",
       "result_text": "Фи как грубо",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     },
     {
       "text": "Булку с сыром",
       "event": "player.money=666",
       "result_text": "А это вообще к чему?",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     },
     {
       "text": "Ясна, автору 0 лет",
       "event": "player.health=-9000",
       "result_text": "А вот сейчас обидно было \n Ну что за идиот",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     }
   ]
 }

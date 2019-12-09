@@ -9,28 +9,32 @@
       "event": "player.mood-=5",
       "result_text": "А жаренных гвоздей не желаете? Не армия, и на том спасибо. Добро пожаловать в лучший университет",
       "next_event": "путь у файлу ивента, который нужно вызвать при следующем вызове эвента через время, none если такого нет",
-      "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет"
+      "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет",
+      "set_available_event": "none"
     },
     {
       "text": "Я стану экономистом!",
       "event": "player.mood-=5",
       "result_text": "А жаренных гвоздей не желаете? Не армия, и на том спасибо. Добро пожаловать в лучший университет",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     },
     {
       "text": "Я стану поваром!",
       "event": "player.mood-=5",
       "result_text": "А жаренных гвоздей не желаете? Не армия, и на том спасибо. Добро пожаловать в лучший университет",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     },
     {
       "text": "Не армия и ладно..",
       "event": "player.mood+=10",
       "result_text": "Вот это подход! Сразу видно - наш человек",
       "next_event": "none",
-      "next_instant_event": "none"
+      "next_instant_event": "none",
+      "set_available_event": "none"
     }
   ]
 }
