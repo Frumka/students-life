@@ -5,6 +5,11 @@
 #include <gtest/gtest.h>
 #include "EventCaller.hpp"
 
+#include <thread>
+
+using namespace std::chrono_literals;
+
+
 #define EvCaller EventCaller::getInstance()
 
 TEST(EventCaller, init) {
@@ -30,6 +35,7 @@ TEST(EventCaller, choose_random_ivent) {
 
     for (int i = 0; i < 10; i++) {
         std::string path = EvCaller.choose_random_event();
+
         for (int j = 0; j < 3; j++) {
             if (path == paths[j])
                 choosed[j] += 1;
@@ -55,6 +61,7 @@ TEST(EventCaller, update_event){
 
         for (int j = 0;j  < 5; j++) {
             std::string path = EvCaller.choose_random_event();
+
             for (int k = 0; k < 3; k++) {
                 if (path == paths[k])
                     choosed[k] += 1;
