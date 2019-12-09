@@ -5,3 +5,7 @@
 [submodule "SFML"]
 	path = SFML-src
 	url = https://github.com/SFML/SFML
+
+[submodule "tools/polly"]
+    path = tools/polly
+    url = https://github.com/ruslo/polly
