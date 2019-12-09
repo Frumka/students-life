@@ -8,4 +8,4 @@ CMAKE_TOOLCHAIN_OPTS="-DCMAKE_TOOLCHAIN_FILE='`pwd`/tools/polly/gcc-7-cxx17-pic.
 CMAKE_OPTS="$CMAKE_LINKER_OPTS $CMAKE_CONFIG_OPTS $CMAKE_TOOLCHAIN_OPTS"
 cmake -H. -B_builds $CMAKE_OPTS
 cmake --build _builds
-cmake --build _builds --target student-life-tests -- ARGS="--verbose"
+cmake --build _builds --target student-life-tests
