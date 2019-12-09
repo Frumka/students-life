@@ -7,20 +7,20 @@ set(CMAKE_CXX_STANDARD 14)
 #string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 if(UNIX AND NOT APPLE)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-deb/include")
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-deb/include")
 
-endif(UNIX AND NOT APPLE)
+elseif(WIN32)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win/include")
 
-if(WIN32)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win/include")
-endif(WIN32)
+elseif(WIN64)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/include")
+	set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib/cmake/SFML")
 
-#TODO: попробовать убрать лишние команды
-if(WIN64)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/include")
-	set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib")
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML-2.5.1-win64/lib/cmake/SFML")
-endif(WIN64)
+else()
+	add_subdirectory(SFML/SFML-src)
+
+endif()
 
 include("tools/gate/cmake/HunterGate.cmake")
 
