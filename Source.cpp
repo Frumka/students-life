@@ -134,13 +134,10 @@ int main()
 
 	bool* active_window;
 	active_window = &main_men.is_active;
-
+	int set_volume = 50;
 	Music music;
-	//music.openFromFile("music/1565802332_antoha-ms-tokye.ogg");
-	//music.play();
-	//music.setVolume(0);
-
-
+	music.openFromFile("music/1565802332_antoha-ms-tokye.ogg");
+	music.play();
 	Background job("images/main_back.png");
 	job.push_sprite("images/game_page_1.png", 342, 184);
 	Button job_start("images/start_job_button.png", 745, 550, Color::Cyan);
@@ -148,7 +145,6 @@ int main()
 
 	Background game("images/ivent.png");
 
-	int set_volume = 50;
 	Texture ris;
 	ris.loadFromFile("images/riska.png");
 	Sprite riska;
@@ -171,6 +167,7 @@ int main()
 
 	bool saved_by_gf = false;
 	bool saved_by_friends = false;
+	bool flag_continue = false;
 	while (window.isOpen())
 	{
 		if (player.get_health() < 0){
@@ -243,9 +240,10 @@ int main()
 			main_men.draw(window);
 			if (new_game.is_click())
 			{
+
 				GlobalTimer.start();
 				EvCaller.set_EventList("json_events/EventList.json");
-
+				flag_continue = true;
 				processor.load_event("json_events/SPECIAL_hello_student.json");
 
 				ivent.update(processor);
@@ -258,7 +256,7 @@ int main()
 				active_window = &ivent.is_active;
 				*active_window = true;
 			}
-			if (continue_game.is_click())
+			if (continue_game.is_click() && flag_continue)
 			{
 				*active_window = false;
 				active_window = &main_game.is_active;
@@ -483,6 +481,7 @@ int main()
 			GlobalTimer.freeze();
 
 			nastroyki.draw(window);
+			music.setVolume(set_volume);
 			sound_volume(350, riska, set_volume);
 
 			draw_money(window, player);
@@ -502,21 +501,24 @@ int main()
 			}
 		}
 		if(death_screen){
-			GlobalTimer.freeze();
+			//GlobalTimer.freeze();
+			flag_continue = false;
 			death_screen.draw(window);
+			player.set_health(10);
+			player.set_mood(10);
 		}
 
 
 		if (event.type == sf::Event::Closed)
 			window.close();
 
-		if (event.type == event.KeyPressed && event.key.code == Keyboard::Escape)
+		if (event.type == event.KeyPressed && event.key.code == Keyboard::Escape && !(ivent.is_active))
 		{
+			std::cout << "Нажат эскейп";
 			*active_window = false;
 			active_window = &main_men.is_active;
 			*active_window = true;
 		}
-
 
 		window.display();
 	}

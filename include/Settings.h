@@ -21,7 +21,7 @@ void sound_volume(float y_pos, Sprite &riska, int &volume) {
         if (Mouse::isButtonPressed(Mouse::Left)) {
             volume = ((float) Mouse::getPosition().x - (float) 1030 * x) * 100. / (470. * x);
             std::cout << volume;
-            if (volume <= 4) {
+            if (volume <= 0) {
                 std::cout << "++";
                 volume = 0;
             }
