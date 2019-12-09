@@ -5,22 +5,16 @@ language:
 services:
   - docker
 
-compiler:
-  - gcc
-
-env:
-  - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
-
 jobs:
   include:
-    - name: "build"
-      script:
-        - cmake CMakeLists.txt
-
-        - cmake --build .
     - name: "tests"
       script:
         - docker run -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/tests.sh
+    - name: "quality"
+      script:
+        - ./scripts/genenv.sh
+        - docker run --env-file .env -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/coverage.sh
+        - docker run --env-file .env -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/duplication.sh
 
 notifications:
   email: false
