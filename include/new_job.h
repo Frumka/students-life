@@ -183,4 +183,5 @@ int mont(Player& player) {
 		}
 		return money;
 	}
+	return 0;
 }

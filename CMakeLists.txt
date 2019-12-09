@@ -4,23 +4,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 option(BUILD_COVERAGE "Build coverage" OFF)
 
-if(UNIX AND NOT APPLE)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-deb/include")
-
-elseif(WIN32)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win/include")
-
-elseif(WIN64)
-	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/include")
-	set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib")
-	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib/cmake/SFML")
-
-else()
-	add_subdirectory(SFML/SFML-src)
-	set(IS_BUILDING_SFML TRUE)
-
-endif()
-
 include("tools/gate/cmake/HunterGate.cmake")
 
 set(HUNTER_CACHE_SERVERS
@@ -34,17 +17,41 @@ HunterGate(
 )
 
 project(student-life-main)
-if(NOT IS_BUILDING_SFML)
+
+if(WIN32)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win/include")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win/lib/cmake/SFML")
+
 	link_directories(
-		SFML_LIBRARY_DIR
+			SFML_LIBRARY_DIR
 	)
 
 	include_directories(
-		SFML_INCLUDE_DIR
+			SFML_INCLUDE_DIR
 	)
 
 	find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
+
+elseif(WIN64)
+	set(SFML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/include")
+	set(SFML_LIBRARY_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib")
+	set(SFML_DIR "${CMAKE_SOURCE_DIR}/SFML/SFML-2.5.1-win64/lib/cmake/SFML")
+
+	link_directories(
+			SFML_LIBRARY_DIR
+	)
+
+	include_directories(
+			SFML_INCLUDE_DIR
+	)
+
+	find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
+else()
+	add_subdirectory(SFML/SFML-src)
+	set(IS_BUILDING_SFML TRUE)
+
 endif()
+
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
@@ -61,8 +68,6 @@ target_include_directories(student-life-tests
 		)
 
 add_subdirectory(event_processor)
-
-find_package(SFML 2.5.1 COMPONENTS graphics audio system window REQUIRED)
 
 target_link_libraries(student-life-main
 		sfml-graphics
