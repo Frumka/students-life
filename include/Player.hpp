@@ -11,6 +11,7 @@ private:
     std::string health = "30";
     std::string mood = "80";
 
+    //std::string
 public:
     std::map<std::string, std::string *> acessor = {
             {"money",  &money},

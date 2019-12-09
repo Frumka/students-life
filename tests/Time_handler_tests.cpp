@@ -22,7 +22,7 @@ TEST(Time_handler, start) {
     Timer.start();
     std::this_thread::sleep_for(50ms);
 
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
 }
 
 TEST(Time_handler, freeze) {
@@ -30,14 +30,14 @@ TEST(Time_handler, freeze) {
     std::this_thread::sleep_for(50ms);
 
     Timer.freeze();
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
 
     std::this_thread::sleep_for(50ms);
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
     Timer.freeze();
 
     std::this_thread::sleep_for(50ms);
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
 }
 
 TEST(Time_handler, unfreeze) {
@@ -45,10 +45,10 @@ TEST(Time_handler, unfreeze) {
     std::this_thread::sleep_for(50ms);
 
     Timer.unfreeze();
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
 
     std::this_thread::sleep_for(50ms);
-    EXPECT_NEAR(Timer.get_seconds(), 0.1, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.1, 0.005);
 }
 
 TEST(Time_handler, freeze_unfreeze) {
@@ -56,19 +56,19 @@ TEST(Time_handler, freeze_unfreeze) {
     std::this_thread::sleep_for(50ms);
 
     Timer.freeze();
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
 
     std::this_thread::sleep_for(50ms);
-    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.05, 0.005);
     Timer.unfreeze();
 
     std::this_thread::sleep_for(50ms);
-    EXPECT_NEAR(Timer.get_seconds(), 0.1, 0.001);
+    EXPECT_NEAR(Timer.get_seconds(), 0.1, 0.005);
 }
 
 TEST(Time_handler, get_time) {
     Timer.start();
     std::this_thread::sleep_for(50ms);
 
-    EXPECT_NEAR(Timer.get_time().asSeconds(), 0.05, 0.001);
+    EXPECT_NEAR(Timer.get_time().asSeconds(), 0.05, 0.005);
 }

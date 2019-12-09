@@ -14,9 +14,10 @@ using json = nlohmann::json;
 
 class EventCaller {
 private:
-    uint64_t event_number;
-
     std::vector<std::pair<std::string, bool>> event_paths;
+    json event_list;
+
+    uint64_t event_number;
 
     std::string choose_from_available(int max_tries = 10) {
         std::random_device rd;
@@ -67,8 +68,6 @@ private:
     ~EventCaller() = default;
 
 public:
-    json event_list;
-
     EventCaller(const EventCaller &) = delete;
 
     EventCaller &operator=(EventCaller &) = delete;
@@ -81,6 +80,10 @@ public:
     void update_EventList(const std::string &key, bool is_available){
         if(key != "none"){
             event_list[key] = is_available;
+            for(auto& e: event_paths){
+                if(e.first == key)
+                    e.second = is_available;
+            }
         }
     }
 
@@ -89,7 +92,7 @@ public:
         event_list = json::parse(ifs);
         event_number = event_list.size();
 
-        std::cerr<<std::setw(4)<<event_list<<std::endl;
+        //std::cerr<<"On set: "<<std::setw(4)<<event_list<<std::endl;
 
         event_paths.resize(event_number);
 
@@ -102,9 +105,13 @@ public:
         std::ifstream ds(path_to_event);
         json event = json::parse(ds);
 
-        event_list[path_to_event] = !event["is_unique"];
+        if(event["is_unique"]){
+            for(auto& e: event_paths){
+                if(e.first == path_to_event)
+                    e.second = false;
+            }
+        }
 
-        update_paths();
         return path_to_event;
     }
 

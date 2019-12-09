@@ -1,0 +1,7 @@
+[submodule "tools/gate"]
+	path = tools/gate
+	url = https://github.com/hunter-packages/gate.git
+
+[submodule "SFML"]
+	path = SFML-src
+	url = https://github.com/SFML/SFML

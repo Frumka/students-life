@@ -5,6 +5,11 @@
 #include <gtest/gtest.h>
 #include "EventCaller.hpp"
 
+#include <thread>
+
+using namespace std::chrono_literals;
+
+
 #define EvCaller EventCaller::getInstance()
 
 TEST(EventCaller, init) {
@@ -30,6 +35,7 @@ TEST(EventCaller, choose_random_ivent) {
 
     for (int i = 0; i < 10; i++) {
         std::string path = EvCaller.choose_random_event();
+
         for (int j = 0; j < 3; j++) {
             if (path == paths[j])
                 choosed[j] += 1;
@@ -41,35 +47,33 @@ TEST(EventCaller, choose_random_ivent) {
     EXPECT_EQ(choosed[2], 9);
 }
 
-TEST(EventCaller, update_event){
-    for(int i = 0; i < 1; i++) {
-        std::string paths[] = {"tests/json_event_examples/testing_event.json",
-                               "tests/json_event_examples/unavailable_event.json",
-                               "tests/json_event_examples/unexpected_zachet.json"};
+TEST(EventCaller, update_event) {
+    std::string paths[] = {"tests/json_event_examples/testing_event.json",
+                           "tests/json_event_examples/unavailable_event.json",
+                           "tests/json_event_examples/unexpected_zachet.json"};
 
-        int choosed[] = {0, 0, 0};
+    int choosed[] = {0, 0, 0};
 
-        EvCaller.set_EventList("tests/json_event_examples/EventList.json");
+    EvCaller.set_EventList("tests/json_event_examples/EventList.json");
 
-        EvCaller.update_EventList("tests/json_event_examples/testing_event.json", false);
+    EvCaller.update_EventList("tests/json_event_examples/testing_event.json", false);
 
-        for (int j = 0;j  < 5; j++) {
-            std::string path = EvCaller.choose_random_event();
-            for (int k = 0; k < 3; k++) {
-                if (path == paths[k])
-                    choosed[k] += 1;
-            }
+    for (int j = 0; j < 5; j++) {
+        std::string path = EvCaller.choose_random_event();
+
+        for (int k = 0; k < 3; k++) {
+            if (path == paths[k])
+                choosed[k] += 1;
         }
-
-        EXPECT_EQ(choosed[0], 0);
-        EXPECT_EQ(choosed[1], 0);
-        EXPECT_EQ(choosed[2], 5);
     }
-/*
+
+    EXPECT_EQ(choosed[0], 0);
+    EXPECT_EQ(choosed[1], 0);
+    EXPECT_EQ(choosed[2], 5);
+
     EvCaller.update_EventList("tests/json_event_examples/unavailable_event.json", true);
     EvCaller.update_EventList("tests/json_event_examples/unexpected_zachet.json", false);
 
     std::string path = EvCaller.choose_random_event();
     EXPECT_EQ(path, "tests/json_event_examples/unavailable_event.json");
-*/
 }

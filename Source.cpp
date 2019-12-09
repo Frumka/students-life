@@ -172,7 +172,6 @@ int main()
 			player.set_health(player.get_health() - 10);
 		}
 		float time = GlobalTimer.get_seconds();
-		//std::cout<<"time is: "<<time<<std::endl;
 
 		if (!event_is_called_on_cicle and time > 1) {
 			if (static_cast<int>(time) % 10 == 0) {
