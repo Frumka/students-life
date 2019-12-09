@@ -11,8 +11,8 @@
         "player.money-=1000"
       ],
       "result_text": "Хехехехе...",
-      "next_event": "путь у файлу ивента, который нужно вызвать при следующем вызове эвента через время, none если такого нет",
-      "next_instant_event": "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет",
+      "next_event": "json_events/SPECIAL_hello_student.json",
+      "next_instant_event": "none",
       "set_available_event": "none"
     },
     {

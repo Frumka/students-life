@@ -14,6 +14,8 @@ using json = nlohmann::json;
 
 class EventCaller {
 private:
+    std::string next_event = "0";
+    
     std::vector<std::pair<std::string, bool>> event_paths;
     json event_list;
 
@@ -76,6 +78,10 @@ public:
         static EventCaller instance;
         return instance;
     }
+    
+    void set_next(const std::string &path){
+        next_event = path;
+    }
 
     void update_EventList(const std::string &key, bool is_available){
         if(key != "none"){
@@ -100,6 +106,12 @@ public:
     }
 
     std::string choose_random_event(int max_tries = 10) {
+        if(next_event != "0"){
+            std::string res = next_event;
+            next_event = "0";
+            return res;
+        }
+        
         std::string path_to_event = choose_from_available(max_tries);
 
         std::ifstream ds(path_to_event);

@@ -77,3 +77,11 @@ TEST(EventCaller, update_event) {
     std::string path = EvCaller.choose_random_event();
     EXPECT_EQ(path, "tests/json_event_examples/unavailable_event.json");
 }
+
+TEST(EventCaller, set_next){
+    EvCaller.set_EventList("tests/json_event_examples/EventList.json");
+
+    EvCaller.set_next("tests/json_event_examples/unavailable_event.json");
+    
+    EXPECT_EQ(EvCaller.choose_random_event(), "tests/json_event_examples/unavailable_event.json");
+}

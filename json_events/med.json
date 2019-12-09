@@ -12,8 +12,8 @@
         "player.health-= 30"
       ],
       "result_text" : "Вы потратили 5 часов не дождались своей очереди и пошли в платную",
-      "next_event" : "путь у файлу ивента, который нужно вызвать при следующем вызове эвента через время, none если такого нет",
-      "next_instant_event" : "путь у файлу ивента, который нужно вызвать сразу после нажатия, none если такого нет",
+      "next_event" : "none",
+      "next_instant_event" : "json_events/unexpected_zachet.json",
       "set_available_event" : "none"
     },
     {

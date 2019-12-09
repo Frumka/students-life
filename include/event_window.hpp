@@ -17,9 +17,12 @@ private:
     std::string path_to_activated = "none";
     
 public:
-    event_button(float x, float y, std::function<void()> onclick, const std::wstring &button_text,
+    json button_json;
+
+    event_button(const json &_button_json, float x, float y, std::function<void()> onclick, const std::wstring &button_text,
                  const std::string &_result_text, const std::string &path_to_activated) :
             Button::Button("images/EventButton.png", x, y, Color::Cyan) {
+        button_json = _button_json;
         onclick_event = onclick;
         button_description = button_text;
         result_text = _result_text;
@@ -148,7 +151,7 @@ public:
 
             std::wstring message = str_to_wstr(processor.saved_event["buttons"][i]["text"]);
 
-            buttons.emplace_back(360, 184 + 350 + 88 * i,
+            buttons.emplace_back(processor.saved_event["buttons"][i], 360, 184 + 350 + 88 * i,
                                  onclick, str_to_wstr(processor.saved_event["buttons"][i]["text"]),
                                  processor.saved_event["buttons"][i]["result_text"],
                                  processor.saved_event["buttons"][i]["set_available_event"]);
