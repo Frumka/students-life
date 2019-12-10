@@ -7,6 +7,7 @@ services:
   - docker
 
 before_install:
+  - echo "I WORK!"
   - sudo apt-get update
   - sudo apt-get -y install libx11-dev libfreetype6-dev libxrandr-dev libudev-dev libogg-dev libflac-dev libvorbis-dev libopenal-dev
 
