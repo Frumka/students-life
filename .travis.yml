@@ -6,30 +6,9 @@ language:
 services:
   - docker
 
-addons:
-  apt:
-    sources:
-      - deadsnakes
-      - ubuntu-toolchain-r-test
-      - george-edison55-precise-backports
-      - llvm-toolchain-trusty-4.0
-    packages:
-      - build-essential
-      - cmake
-      - cmake-data
-      - clang-4.0
-      - g++-6
-      - gcc-6
-      - libc6-dev
-      - xorg-dev
-      - libx11-dev
-      - libxmu-dev
-      - libxi-dev
-      - libgl1-mesa-dev
-      - libosmesa-dev
-      - x11proto-core-dev
-      - lcov
-      - ggcov
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install libx11 libx11-dev libfreetype6-dev libxrandr-dev libudev-dev libogg-dev libflac-dev libvorbis-dev libopenal-dev
 
 jobs:
   include:
